@@ -1,0 +1,42 @@
+/* @import '~js-datepicker/dist/datepicker.min.css'  */
+
+/* font-family: 'Outfit', sans-serif;
+font-family: 'Roboto', sans-serif; */
+
+body {
+  display: flex;
+  flex-direction: column;
+  background-color: #948a8b;
+  height: 100vh;
+  width: 100vw;
+}
+
+header {
+  display: flex;
+  flex-direction: row;
+  background-color: aqua;
+}
+
+.logo-wrapper {
+  display: flex;
+  flex-direction: column;
+  background-color: blueviolet;
+}
+
+nav {
+  background-color: aqua;
+}
+img {
+  height: 150px;
+  width: 200px;
+}
+
+.overlook-heading {
+  font-family: 'Outfit', sans-serif;
+  font-size: 68px;
+  color: #c6a82b;
+}
+
+.hidden {
+  display: none;
+}

@@ -2,7 +2,7 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="UTF-8" />
-    <link rel="stylesheet" href=".src/styles.css" />
+    <link rel="stylesheet" href="src/css/styles.css" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="datepicker.min.css" />
@@ -16,14 +16,17 @@
   </head>
   <body>
     <header>
-      <h1>Overlook at Chimney Hollow</h1>
-      <img
-        class="overlook-logo"
-        src="src/images/overlook-logo.jpg"
-        alt="overlook-logo"
-        id="overlookLogo"
-      />
-      <h2 class="och-tagline">Oh so different!</h2>
+      <div class="logo-wrapper">
+        <img
+          class="overlook-logo"
+          src="../src/images/overlook-logo.jpg"
+          alt="overlook-logo"
+          id="overlookLogo"
+        />
+        <img src="./images/turing-logo.png" alt="turing logo" />
+        <h2 class="och-tagline">Oh so different!</h2>
+      </div>
+      <h1 class="overlook-heading">Overlook at Chimney Hollow</h1>
       <button class="master-nav hidden" id="bookRoomBtn">Book Room</button>
       <button class="master-nav hidden" id="logOutBtn">Log Out</button>
       <button class="master-nav hidden" id="dashboard">Dashboard</button>
@@ -32,24 +35,38 @@
     <main>
       <section class="dashboard-view hidden" id="dashboardView">
         <nav class="dashboard-view" id="navDashboard">
-          <button class="dashboard-nav hidden" id="upcomingBookings">
+          <button class="dashboard-nav" id="upcomingBookings">
             Upcoming Bookings
           </button>
-          <button class="dashboard-nav hidden" id="pastBookings">
-            Past Stays
-          </button>
+          <button class="dashboard-nav" id="pastBookings">Past Stays</button>
         </nav>
+        <div class="card-container" id="cardContainer">
+          <div class="card-wrapper-01" id="cardWrapper-01"></div>
+          <div class="img-wrapper-01" id="imgWrapper-01"></div>
+          <div class="room-details-wrapper-01" id="roomDetailsWrapper-01"></div>
+          <div class="card-wrapper-02" id="cardWrapper-02"></div>
+          <div class="img-wrapper-02" id="imgWrapper-02"></div>
+          <div class="room-details-wrapper-02" id="roomDetailsWrapper-02"></div>
+          <div class="card-wrapper-03" id="cardWrapper-03"></div>
+          <div class="img-wrapper-03" id="imgWrapper-03"></div>
+          <div class="room-details-wrapper-03" id="roomDetailsWrapper-03"></div>
+          <div class="card-wrapper-04" id="cardWrapper-04"></div>
+          <div class="img-wrapper-04" id="imgWrapper-04"></div>
+          <div class="room-details-wrapper-04" id="roomDetailsWrapper-04"></div>
+          <div class="card-wrapper-05" id="cardWrapper-05"></div>
+          <div class="img-wrapper-05" id="imgWrapper-01"></div>
+          <div class="room-details-wrapper-05" id="roomDetailsWrapper-05"></div>
+          <div class="card-wrapper-06" id="cardWrapper-06"></div>
+          <div class="img-wrapper-06" id="imgWrapper-06"></div>
+          <div class="room-details-wrapper-06" id="roomDetailsWrapper-01"></div>
+        </div>
       </section>
       <section class="book-a-room-step-one hidden" id="bookARoomOne">
-        <nav class="book-a-room-one hidden" id="navBookARoomOne">
+        <nav class="book-a-room-one" id="navBookARoomOne">
           <button class="single-room" id="singleRoom">Single</button>
-          <button class="book-a-room-one hidden" id="juniorSuite">
-            Junior Suite
-          </button>
-          <button class="book-a-room-one hidden" id="residential">
-            Residential
-          </button>
-          <button class="book-a-room-one hidden" id="suite">Suite</button>
+          <button class="junior-suite" id="juniorSuite">Junior Suite</button>
+          <button class="residential" id="residential">Residential</button>
+          <button class="suite" id="suite">Suite</button>
         </nav>
       </section>
       <section class="book-a-room-step-two hidden" id="bookARoomTwo"></section>
