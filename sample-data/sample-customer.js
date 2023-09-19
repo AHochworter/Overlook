@@ -1,50 +1,42 @@
-"customers" = [
-    {
-    "id": 20,
-    "name": "Keon Kirlin"
-    },
-    {
-    "id": 22,
-    "name": "Amalia Rowe"
-    },
-    {
-    "id": 25,
-    "name": "Rashawn Langworth"
-    },
-    {
-    "id": 27,
-    "name": "Sigrid Barrows"
-    },
-    {
-    "id": 36,
-    "name": "Michel Kunze"
-    },
-    {
-    "id": 38,
-    "name": "Alessia Rippin"
-    },
-    {
-    "id": 39,
-    "name": "Moises Nader"
-    },
-    {
-    "id": 41,
-    "name": "Francisca Trantow"
-    },
-    {
-    "id": 43,
-    "name": "Earline Hamill"
-    },
-    {
-    "id": 47,
-    "name": "Rachael Schinner"
-    },
-    {
-    "id": 48,
-    "name": "Kaylee Hermann"
-    },
-    {
-    "id": 49,
-    "name": "Arnulfo Simonis"
-    },
-]
+[
+  {
+    id: 1,
+    name: 'Amelia Thompson',
+  },
+  {
+    id: 2,
+    name: 'Benjamin Mitchell',
+  },
+  {
+    id: 3,
+    name: 'Olivia Parker',
+  },
+  {
+    id: 4,
+    name: 'Ethan Williams',
+  },
+  {
+    id: 5,
+    name: 'Sophia Davis',
+  },
+  {
+    id: 6,
+    name: 'Jackson Lewis',
+  },
+  {
+    id: 7,
+    name: 'Emma Wilson',
+  },
+  {
+    id: 8,
+    name: 'Liam Anderson',
+  },
+  {
+    id: 9,
+    name: 'Mia Johnson',
+  },
+  {
+    id: 10,
+    name: 'Noah White',
+  },
+];
