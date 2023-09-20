@@ -6,6 +6,7 @@ font-family: 'Roboto', sans-serif; */
 body {
   display: flex;
   flex-direction: column;
+  align-items: center;
   background-color: #948a8b;
   height: 100vh;
   width: 100vw;
@@ -19,16 +20,17 @@ main {
 header {
   display: flex;
   flex-direction: row;
-  justify-content: flex-start;
-  height: 200px;
-  /* background-color: aqua; */
+  justify-content: space-between;
+  width: 1395px;
+  height: 175px;
+  background-color: aqua;
 }
 
 .logo-wrapper {
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* background-color: blueviolet; */
+  background-color: blueviolet;
   width: 165px;
 }
 
@@ -41,7 +43,7 @@ header {
 .overlook-heading {
   display: flex;
   font-family: 'Outfit', sans-serif;
-  font-size: 65px;
+  font-size: 45px;
   color: #c6a82b;
 }
 
