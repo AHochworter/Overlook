@@ -3,7 +3,13 @@ const expect = chai.expect;
 import customerData from '../sample-data/sample-customer';
 import bookingsData from '../sample-data/sample-bookings';
 import roomData from '../sample-data/sample-rooms';
-import { getRandomGuest, filterBookingsByGuest } from '../src/user-bookings';
+import {
+  getRandomGuest,
+  filterBookingsByGuest,
+  bookingsByRoomByGuest,
+  guestPastBookings,
+  guestComingBookings,
+} from '../src/user-bookings';
 
 describe('bookings', function () {
   let currentGuest = { id: 1, name: 'Amelia Thompson' };
@@ -41,5 +47,81 @@ describe('bookings', function () {
         roomNumber: 20,
       },
     ]);
+  });
+  it('bookingsByRoomByGuest should be a function', () => {
+    expect(bookingsByRoomByGuest).to.be.a('function');
+  });
+
+  it('should return rooms booked by a specific guest', () => {
+    let currentGuest = { id: 1, name: 'Amelia Thompson' };
+
+    const bookingsAmelia = bookingsByRoomByGuest(
+      currentGuest,
+      bookingsData,
+      roomData
+    );
+
+    expect(bookingsAmelia).to.deep.equal([
+      {
+        room: {
+          number: 8,
+          roomType: 'junior Suite',
+          bidet: 'false',
+          bedSize: 'king',
+          numBeds: 1,
+          costPerNight: 1195.95,
+        },
+        date: '1/8/23',
+      },
+      {
+        room: {
+          number: 12,
+          roomType: 'single room',
+          bidet: 'false',
+          bedSize: 'twin',
+          numBeds: 2,
+          costPerNight: 1129.07,
+        },
+        date: '1/10/23',
+      },
+      {
+        room: {
+          number: 2,
+          roomType: 'suite',
+          bidet: 'false',
+          bedSize: 'Full',
+          numBeds: 2,
+          costPerNight: 1358.04,
+        },
+        date: '1/25/23',
+      },
+      {
+        room: {
+          number: 20,
+          roomType: 'residential suite',
+          bidet: 'false',
+          bedSize: 'queen',
+          numBeds: 1,
+          costPerNight: 1257.96,
+        },
+        date: '1/26/23',
+      },
+    ]);
+  });
+
+  it('guestPastBookings should be a function', () => {
+    expect(guestPastBookings).to.be.a('function');
+  });
+  it('should return past bookings for a specific guest', () => {
+    const currentGuest = { id: 1, name: 'Amelia Thompson' };
+    const pastBookings = guestPastBookings(
+      currentGuest,
+      bookingsData,
+      roomData
+    );
+    //How do I set the 'expect' results for this test??
+  });
+  it('guestComingBookings should be a function', () => {
+    expect(guestComingBookings).to.be.a('function');
   });
 });
