@@ -1,4 +1,4 @@
-[
+const bookingsData = [
   {
     id: 'Sample_5fwrgu4i7k55hl6sz',
     userID: 1,
@@ -276,3 +276,5 @@
     roomNumber: 15,
   },
 ];
+
+export default bookingsData;

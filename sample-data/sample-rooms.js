@@ -1,4 +1,4 @@
-[
+const roomData = [
   {
     number: 1,
     roomType: 'residential suite',
@@ -200,3 +200,5 @@
     costPerNight: 1229.39,
   },
 ];
+
+export default roomData;

@@ -12,6 +12,9 @@ import './images/single room.jpg';
 import './images/junior suite.jpg';
 import './images/residential.jpg';
 
+//Global Variables👇
+currentGuest;
+
 console.log('This is the JavaScript entry file - your code begins here.');
 
 //datePicker
