@@ -37,7 +37,7 @@ const guestPastBookings = (currentGuest, allBookings, allRooms) => {
   );
   const currentDate = new Date();
   const pastBookings = guestBookings.filter(booking => {
-    // Convert the booking date to a JavaScript Date object
+    // Convert the booking date to a JavaScript Date object -> not sure about this step.
     const bookingDate = new Date(booking.date);
     return bookingDate < currentDate;
   });
@@ -52,16 +52,30 @@ const guestComingBookings = (currentGuest, allBookings, allRooms) => {
   );
   const currentDate = new Date();
   const upcomingBookings = guestBookings.filter(booking => {
-    // Convert the booking date to a JavaScript Date object
+    // Convert the booking date to a JavaScript Date object -> not sure about this step.
     const bookingDate = new Date(booking.date);
     return bookingDate >= currentDate;
   });
   return upcomingBookings;
 };
 
-//Helper Functions
-const handleDates = date => {
-  date.replaceAll('-', '/');
+const guestTotalSpent = (currentGuest, allBookings, allRooms) => {
+  console.log('currentGuest in TotalSpent:', currentGuest);
+  const guestPriorBookings = guestPastBookings(
+    currentGuest,
+    allBookings,
+    allRooms
+  );
+  console.log('guestPriorBookings', guestPriorBookings);
+  const guestTotal = guestPriorBookings.reduce((acc, booking) => {
+    // Get costPerNight from the room object within each booking
+    const costPerNight = booking.room.costPerNight;
+    console.log('costPerNight', costPerNight);
+    acc += costPerNight;
+
+    return acc;
+  }, 0);
+  return guestTotal;
 };
 
 export {
@@ -70,4 +84,5 @@ export {
   bookingsByRoomByGuest,
   guestPastBookings,
   guestComingBookings,
+  guestTotalSpent,
 };
