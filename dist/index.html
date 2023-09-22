@@ -15,7 +15,7 @@
     <title>Overlook</title>
   </head>
   <body>
-    <header>
+    <header class="page-header">
       <div class="logo-wrapper">
         <img
           class="img-logo"
@@ -26,12 +26,23 @@
       </div>
       <h1 class="overlook-heading">Overlook at Chimney Hollow</h1>
       <p class="welcome-user">Welcome Back (username here) !</p>
-      <button class="master-nav" id="bookRoomBtn">Book Room</button>
-      <button class="master-nav" id="logOutBtn">Log Out</button>
-      <button class="master-nav" id="dashboard">Dashboard</button>
+      <button class="master-nav hidden" id="bookRoomBtn">Book Room</button>
+      <button class="master-nav hidden" id="logOutBtn">Log Out</button>
+      <button class="master-nav hidden" id="dashboard">Dashboard</button>
     </header>
     <main>
-      <section class="dashboard-view" id="dashboardView">
+      <section class="login-view" id="loginView">
+        <div class="login-wrapper" id="loginWrapper">
+          <form class="login-form">
+            <label class="username">User Name</label><br />
+            <input type="text" id="userName" value="" /><br />
+            <label class="password">Password</label><br />
+            <input type="text" id="passWord" value="" /><br />
+            <input type="submit" class="login-btn" value="Login" />
+          </form>
+        </div>
+      </section>
+      <section class="dashboard-view hidden" id="dashboardView">
         <nav class="dashboard-view-nav" id="navDashboard">
           <button class="dashboard-btn" id="upcomingBookings">Upcoming</button>
           <button class="dashboard-btn" id="pastBookings">Past Stays</button>
