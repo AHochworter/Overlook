@@ -23,3 +23,22 @@ const picker = datepicker(selector, options);
 const gettingStarted = () => {
   console.log('Starting Overlook Setup');
 };
+
+//Helper Functions👇
+const handleDates = date => {
+  date.replaceAll('-', '/');
+};
+
+const removeHiddenClass = elements => {
+  elements.forEach(element => {
+    element.classList.remove('hidden');
+  });
+  return elements;
+};
+
+const addHiddenClass = elements => {
+  elements.forEach(element => {
+    element.classList.add('hidden');
+  });
+  return elements;
+};
