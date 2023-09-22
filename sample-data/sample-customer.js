@@ -1,4 +1,4 @@
-[
+const customerData = [
   {
     id: 1,
     name: 'Amelia Thompson',
@@ -40,3 +40,5 @@
     name: 'Noah White',
   },
 ];
+
+export default customerData;
