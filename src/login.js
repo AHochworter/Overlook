@@ -26,6 +26,7 @@ const verifyLogin = (username, password) => {
 
   if (user) {
     currentGuest = user; // Set the currentGuest upon successful login
+    console.log(currentGuest);
     return true; // Return true to indicate successful login
   } else {
     return false; // Return false to indicate failed login

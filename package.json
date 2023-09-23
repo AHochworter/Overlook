@@ -29,7 +29,5 @@
     "test": "mochapack 'test/**/*.js'",
     "lint": "./node_modules/.bin/eslint 'src/**.js' 'test/**.js'"
   },
-  "dependencies": {
-    "js-datepicker": "^5.18.2"
-  }
+  "dependencies": {}
 }
