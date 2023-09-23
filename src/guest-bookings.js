@@ -60,17 +60,14 @@ const guestComingBookings = (currentGuest, allBookings, allRooms) => {
 };
 
 const guestTotalSpent = (currentGuest, allBookings, allRooms) => {
-  console.log('currentGuest in TotalSpent:', currentGuest);
   const guestPriorBookings = guestPastBookings(
     currentGuest,
     allBookings,
     allRooms
   );
-  console.log('guestPriorBookings', guestPriorBookings);
   const guestTotal = guestPriorBookings.reduce((acc, booking) => {
     // Get costPerNight from the room object within each booking
     const costPerNight = booking.room.costPerNight;
-    console.log('costPerNight', costPerNight);
     acc += costPerNight;
 
     return acc;

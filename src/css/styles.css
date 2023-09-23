@@ -23,14 +23,14 @@ header {
   justify-content: space-between;
   width: 1395px;
   height: 175px;
-  background-color: aqua;
+  /* background-color: aqua; */
 }
 
 .logo-wrapper {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: blueviolet;
+  /* background-color: blueviolet; */
   width: 165px;
 }
 
