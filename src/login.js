@@ -1,47 +1,35 @@
-const guestLogin = number => {
-  if (number) {
-    return {
-      [`customer${number}`]: {
-        username: `customer${number}`,
-        password: 'overlook2021',
-      },
-    };
+//Function to find guest by username and password
+const findGuest = (username, password, customerData) => {
+  // Extract the numeric portion from the username using split
+  const guestUsername = username.split('customer')[1];
+
+  if (guestUsername) {
+    // Convert the numeric part to an integer
+    const customerId = parseInt(guestUsername, 10);
+
+    // Check if the customerId is within the valid range
+    if (customerId >= 1 && customerId <= customerData.length) {
+      // Check if the customerId matches the id property of a customer
+      const byId = customerData.find(user => user.id === customerId);
+      if (byId) {
+        return byId;
+      }
+    }
   }
+  // Return undefined if no matching customer is found
+  return undefined;
 };
 
-const verifyLoginInfo = (username, password) => {
-  if (username && password) {
-    return matchGuest(username, password);
+// Function to validate login credentials
+const verifyLogin = (username, password) => {
+  const user = findGuest(username, password);
+
+  if (user) {
+    currentGuest = user; // Set the currentGuest upon successful login
+    return true; // Return true to indicate successful login
   } else {
-    return 'Please enter both a username and password';
+    return false; // Return false to indicate failed login
   }
 };
 
-const matchGuest = (username, password) => {
-  const customerId = getGuestId(username);
-  if (customerId > 0 && customerId <= 50) {
-    return validatePassword(customerId, password);
-  } else {
-    return 'Sorry, username not found';
-  }
-};
-
-const validatePassword = (id, password) => {
-  if (password === guestLogin(id)[`customer${id}`].password) {
-    return true;
-  }
-};
-
-const getGuestId = username => {
-  if (username.length === 10 || username.length === 9) {
-    return parseInt(username.split('customer')[1]);
-  }
-};
-
-export {
-  guestLogin,
-  verifyLoginInfo,
-  matchGuest,
-  validatePassword,
-  getGuestId,
-};
+export { findGuest, verifyLogin };

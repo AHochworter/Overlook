@@ -1,34 +1,21 @@
 import chai from 'chai';
 const expect = chai.expect;
 import customers from '../sample-data/sample-customer';
-import bookings from '../sample-data/sample-bookings';
-import rooms from '../sample-data/sample-rooms';
-import {
-  guestLogin,
-  verifyLoginInfo,
-  matchGuest,
-  validatePassword,
-  getGuestId,
-} from '../src/login';
+import { findGuest, verifyLogin } from '../src/login';
 
 describe('login and password', function () {
-  it('guestLogin should be a function', () => {
-    expect(guestLogin).to.be.a('function');
+  it('findGuest should be a function', () => {
+    expect(findGuest).to.be.a('function');
   });
 
-  it('verifyLoginInfo should be a function', () => {
-    expect(verifyLoginInfo).to.be.a('function');
-  });
+  it('should return a valid customer if credentials match', () => {
+    const guestCredentials = findGuest('customer1', 'overlook21', customers);
 
-  it('matchGuest should be a function', () => {
-    expect(matchGuest).to.be.a('function');
-  });
+    // Check if the result is not undefined
+    expect(guestCredentials).to.exist;
 
-  it('validatePassword should be a function', () => {
-    expect(validatePassword).to.be.a('function');
-  });
-
-  it('getGuestId should be a function', () => {
-    expect(getGuestId).to.be.a('function');
+    // Check individual properties of the returned object
+    expect(guestCredentials.name).to.equal('Amelia Thompson');
+    expect(guestCredentials.id).to.equal(1);
   });
 });
