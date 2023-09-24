@@ -8,6 +8,7 @@ import {
   guestComingBookings,
   guestTotalSpent,
 } from '../src/guest-bookings';
+import { allUpcomingBookings, allAvailableRooms } from '../src/new-bookings';
 
 // An example of how you tell webpack to use a CSS (SCSS) file
 import './css/styles.css';
@@ -22,14 +23,18 @@ import './images/residential.jpg';
 //Query Selectors 👇
 const dashboardView = document.getElementById('dashboardView');
 const cardContainer = document.getElementById('cardContainer');
+const roomContainer = document.querySelector('.room-container');
 const welcomeUser = document.getElementById('welcomeUser');
 const totalSpent = document.getElementById('totalSpent');
+const bookRoomOne = document.getElementById('bookARoomOne');
+const searchForm = document.querySelector('form');
 
 //BUTTONS
 const upcomingBookingsBtn = document.getElementById('upcomingBookings');
 const pastBookingsBtn = document.getElementById('pastBookings');
 const bookRoomBtn = document.getElementById('bookRoomBtn');
 const logoutBtn = document.getElementById('logOutBtn');
+const selectDateBtn = document.querySelector('.select-date-btn');
 
 //Global Variables👇
 const currentGuest = {
@@ -64,8 +69,35 @@ const fetchAllData = () => {
     });
 };
 
+//Helper Functions👇
+const handleDates = date => {
+  date.replaceAll('-', '/');
+};
+
+const removeHiddenClass = elements => {
+  elements.forEach(element => {
+    element.classList.remove('hidden');
+  });
+  return elements;
+};
+
+const addHiddenClass = elements => {
+  elements.forEach(element => {
+    element.classList.add('hidden');
+  });
+  return elements;
+};
+
 dashboardView.addEventListener('click', () => {
-  removeHiddenClass([bookRoomBtn, logoutBtn, welcomeUser, totalSpent]);
+  removeHiddenClass([
+    cardContainer,
+    bookRoomBtn,
+    logoutBtn,
+    welcomeUser,
+    totalSpent,
+  ]);
+  addHiddenClass([bookRoomOne]);
+  // document.body.classList.remove('show-room-container');
 
   // Calculate the total spent and update the totalSpent element
   const guestTotal = guestTotalSpent(currentGuest, bookingsData, roomData);
@@ -97,6 +129,20 @@ pastBookingsBtn.addEventListener('click', () => {
   console.log('Past Bookings:', pastBookings);
 
   displayBookings(pastBookings, roomData);
+});
+
+bookRoomBtn.addEventListener('click', () => {
+  console.log('Book Room Clicked');
+  removeHiddenClass([bookRoomOne]);
+  addHiddenClass([
+    cardContainer,
+    bookRoomBtn,
+    logoutBtn,
+    welcomeUser,
+    totalSpent,
+    dashboardView,
+  ]);
+  // document.body.classList.add('show-room-container');
 });
 
 // Call fetchAllData and loadUpcomingBookings when the page loads
@@ -147,21 +193,46 @@ function displayBookings(bookings, roomData) {
   });
 }
 
-//Helper Functions👇
-const handleDates = date => {
-  date.replaceAll('-', '/');
-};
+selectDateBtn.addEventListener('click', () => {
+  const searchDateValue = document.getElementById('dateOfStay').value;
+  console.log(searchDateValue);
+  const searchDate = searchDateValue.replaceAll('-', '/'); //need to format the date to be 11/12/2023 instead of 11-12-2023
+  console.log(searchDate);
 
-const removeHiddenClass = elements => {
-  elements.forEach(element => {
-    element.classList.remove('hidden');
-  });
-  return elements;
-};
+  const roomsAvailable = allAvailableRooms(roomData, bookingsData, searchDate);
+  console.log(roomsAvailable);
 
-const addHiddenClass = elements => {
-  elements.forEach(element => {
-    element.classList.add('hidden');
-  });
-  return elements;
-};
+  if (roomsAvailable.length === 0) {
+    console.log('No rooms Available');
+    // Correct the condition here
+    roomContainer.innerHTML = `
+      <div class="no-rooms-available-message">
+        <p class="no-rooms-match">No Rooms Available</p>
+      </div>`;
+
+    // Hide cardContainer and show roomContainer
+    cardContainer.classList.add('hidden');
+    roomContainer.classList.remove('hidden');
+  } else {
+    console.log('Rooms Available');
+    cardContainer.classList.add('hidden');
+    roomContainer.classList.remove('hidden');
+
+    roomsAvailable.forEach(room => {
+      roomContainer.innerHTML += `
+      <div class="card-wrapper"> 
+        <div class="img-wrapper">
+          <img class="room-img" src="./images/single room.jpg" alt="single room" />
+        </div>
+        <div class="card room-details-wrapper">
+          <h3 class="room-type">Room: ${room.roomType}</h3>
+          <h4 class="bedsize">Bedsize: ${room.bedSize}</h4>
+          <p class="num-beds">Number of Beds: ${room.numBeds}</p>
+     
+      </div>`;
+    });
+    roomContainer.innerHTML += `</div>`;
+
+    // Show cardContainer and hide roomContainer
+  }
+});
