@@ -1,8 +1,3 @@
-function getRandomGuest(data) {
-  const randomIndex = Math.floor(Math.random() * data.length);
-  return data[randomIndex];
-}
-
 const filterBookingsByGuest = (currentGuest, allBookings) => {
   return allBookings.filter(booking => {
     return booking.userID === currentGuest.id;
@@ -76,7 +71,6 @@ const guestTotalSpent = (currentGuest, allBookings, allRooms) => {
 };
 
 export {
-  getRandomGuest,
   filterBookingsByGuest,
   bookingsByRoomByGuest,
   guestPastBookings,

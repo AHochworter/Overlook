@@ -25,7 +25,7 @@
         <h2 class="och-tagline">Oh so different!</h2>
       </div>
       <h1 class="overlook-heading">Overlook at Chimney Hollow</h1>
-      <p class="welcome-user">Welcome Back (username here) !</p>
+      <p class="welcome-user hidden">Welcome Back (username here) !</p>
       <button class="master-nav hidden" id="bookRoomBtn">Book Room</button>
       <button class="master-nav hidden" id="logOutBtn">Log Out</button>
       <button class="master-nav hidden" id="dashboard">Dashboard</button>
@@ -34,16 +34,16 @@
       <section class="login-view hidden" id="loginView">
         <div class="login-wrapper" id="loginWrapper">
           <form class="login-form" id="loginForm">
-            <label class="username">User Name</label><br />
+            <label class="username">Username</label><br />
             <input type="text" id="username" value="" /><br />
             <label class="password">Password</label><br />
-            <input type="password" id="passWord" value="" /><br />
+            <input type="password" id="password" value="" /><br />
             <input type="submit" class="login-btn" value="Login" />
           </form>
           
         </div>
       </section>
-      <section class="dashboard-view hidden" id="dashboardView">
+      <section class="dashboard-view" id="dashboardView">
         <nav class="dashboard-view-nav" id="navDashboard">
           <button class="dashboard-btn" id="upcomingBookings">Upcoming</button>
           <button class="dashboard-btn" id="pastBookings">Past Stays</button>
@@ -129,7 +129,7 @@
           </div>
         </div>
       </section>
-      <section class="book-a-room-step-one" id="bookARoomOne">
+      <section class="book-a-room-step-one hidden" id="bookARoomOne">
         <nav class="book-a-room-one" id="navBookARoomOne">
           <form 
             <label for="select-a-date">Book A Room</label>
@@ -147,8 +147,7 @@
       </section>
       <section class="book-a-room-step-two" id="bookARoomTwo"></section>
     </main>
-    <script src="datepicker.min.js"></script>
-    <!-- Do not include the scripts.js or class files here - it is done by the webpack server -->
+     <!-- Do not include the scripts.js or class files here - it is done by the webpack server -->
     <script src="bundle.js"></script>
   </body>
 </html>

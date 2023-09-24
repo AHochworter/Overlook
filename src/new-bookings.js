@@ -18,7 +18,6 @@ const allAvailableRooms = (allRooms, allBookings, currentDate) => {
   );
 
   // Filter the available rooms by checking if their room number is not in the bookedRoomNumbers array.
-  console.log(bookedRoomNumbers);
   const availableRooms = allRooms.filter(
     room => !bookedRoomNumbers.includes(room.number)
   );

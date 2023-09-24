@@ -1,6 +1,6 @@
 import chai from 'chai';
 const expect = chai.expect;
-import customerData from '../sample-data/sample-customer';
+// import customerData from '../sample-data/sample-customer';
 import bookingsData from '../sample-data/sample-bookings';
 import roomData from '../sample-data/sample-rooms';
 import {
