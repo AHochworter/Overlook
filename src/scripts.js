@@ -21,16 +21,22 @@ import './images/residential.jpg';
 
 //Query Selectors 👇
 const dashboardView = document.getElementById('dashboardView');
+const cardContainer = document.getElementById('cardContainer');
+const welcomeUser = document.getElementById('welcomeUser');
+const totalSpent = document.getElementById('totalSpent');
+
+//BUTTONS
 const upcomingBookingsBtn = document.getElementById('upcomingBookings');
 const pastBookingsBtn = document.getElementById('pastBookings');
-const cardContainer = document.getElementById('cardContainer');
+const bookRoomBtn = document.getElementById('bookRoomBtn');
+const logoutBtn = document.getElementById('logOutBtn');
 
 //Global Variables👇
 const currentGuest = {
-  id: 1,
-  name: 'Leatha Ullrich',
+  id: 17,
+  name: 'Trudie Grimes',
 };
-let customerData; // You should also declare these variables
+let customerData;
 let bookingsData;
 let roomData;
 
@@ -58,7 +64,19 @@ const fetchAllData = () => {
     });
 };
 
+dashboardView.addEventListener('click', () => {
+  removeHiddenClass([bookRoomBtn, logoutBtn, welcomeUser, totalSpent]);
+
+  // Calculate the total spent and update the totalSpent element
+  const guestTotal = guestTotalSpent(currentGuest, bookingsData, roomData);
+  totalSpent.textContent = `Your total Spent is $${guestTotal.toFixed(2)}`;
+
+  // Update the welcome message
+  welcomeUser.textContent = `Welcome Back ${currentGuest.name}!`;
+});
+
 upcomingBookingsBtn.addEventListener('click', () => {
+  console.log('Upcoming was clicked');
   const upcomingBookings = guestComingBookings(
     currentGuest,
     bookingsData,
@@ -68,16 +86,17 @@ upcomingBookingsBtn.addEventListener('click', () => {
   // Log the upcoming bookings
   console.log('Upcoming Bookings:', upcomingBookings);
 
-  displayBookings(upcomingBookings);
+  displayBookings(upcomingBookings, roomData);
 });
 
 pastBookingsBtn.addEventListener('click', () => {
+  console.log('Past Stays was clicked');
   const pastBookings = guestPastBookings(currentGuest, bookingsData, roomData);
 
   // Log the past bookings
   console.log('Past Bookings:', pastBookings);
 
-  displayBookings(pastBookings);
+  displayBookings(pastBookings, roomData);
 });
 
 // Call fetchAllData and loadUpcomingBookings when the page loads
@@ -86,38 +105,46 @@ window.addEventListener('load', () => {
   fetchAllData()
     .then(() => {
       // Once data is fetched, load and display upcoming bookings
-      loadUpcomingBookings();
+      displayBookings(bookingsData, roomData);
     })
     .catch(error => {
       console.error('Error fetching data:', error);
     });
 });
 
-// Function to display bookings in the cardContainer
-function displayBookings(bookings) {
+function displayBookings(bookings, roomData) {
   // Clear the previous content in cardContainer
   cardContainer.innerHTML = '';
 
-  // Loop through bookings and create card elements
-  bookings.forEach((booking, index) => {
-    const cardWrapper = document.createElement('div');
-    cardWrapper.classList.add('card-wrapper', `cardWrapper-${index + 1}`);
+  // Loop through the bookings and create card elements
+  bookings.forEach(booking => {
+    // Find the room details for this booking
+    const roomDetails = bookingsByRoomByGuest(
+      currentGuest,
+      bookingsData,
+      roomData
+    ).find(item => item.date === booking.date);
 
-    // Create and set card content as needed, e.g., room image, details, etc.
-    // You can use booking.room and booking.date to access the room and date info
+    if (roomDetails) {
+      // Create a card element for this booking and its room details
+      const cardElement = document.createElement('div');
+      cardElement.classList.add('card', 'card-wrapper'); // Add classes to the card element
+      cardElement.innerHTML = `
+      
+        <div class="img-wrapper">
+          <img class="room-img" src="./images/single room.jpg" alt="single room" />
+        </div>
+        <div class="card room-details-wrapper">
+          <h3 class="room-type">Room: ${roomDetails.room.roomType}</h3>
+          <h4 class="bedsize">Bedsize: ${roomDetails.room.bedSize}</h4>
+          <p class="num-beds">Number of Beds: ${roomDetails.room.numBeds}</p>
+        </div>
+      `;
 
-    cardContainer.appendChild(cardWrapper);
+      // Append the card element to the cardContainer
+      cardContainer.appendChild(cardElement);
+    }
   });
-}
-
-// Function to load and display upcoming bookings
-function loadUpcomingBookings() {
-  const upcomingBookings = guestComingBookings(
-    currentGuest,
-    bookingsData,
-    roomData
-  );
-  displayBookings(upcomingBookings);
 }
 
 //Helper Functions👇
