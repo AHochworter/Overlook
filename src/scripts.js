@@ -8,6 +8,8 @@ import {
   guestComingBookings,
   guestTotalSpent,
 } from '../src/guest-bookings';
+import { allAvailableRooms } from '../src/new-bookings';
+import { filterRoomsByType } from '../src/filter-rooms';
 
 // An example of how you tell webpack to use a CSS (SCSS) file
 import './css/styles.css';
@@ -17,19 +19,28 @@ import './images/overlook-logo.jpg';
 import './images/village-on-lake.jpg';
 import './images/single room.jpg';
 import './images/junior suite.jpg';
-import './images/residential.jpg';
+import './images/residential suite.jpg';
+import './images/suite.jpg';
 
 //Query Selectors 👇
 const dashboardView = document.getElementById('dashboardView');
 const cardContainer = document.getElementById('cardContainer');
+const roomContainer = document.querySelector('.room-container');
 const welcomeUser = document.getElementById('welcomeUser');
 const totalSpent = document.getElementById('totalSpent');
+const bookRoomOne = document.getElementById('bookARoomOne');
+const searchForm = document.querySelector('form');
 
 //BUTTONS
 const upcomingBookingsBtn = document.getElementById('upcomingBookings');
 const pastBookingsBtn = document.getElementById('pastBookings');
 const bookRoomBtn = document.getElementById('bookRoomBtn');
 const logoutBtn = document.getElementById('logOutBtn');
+const selectDateBtn = document.querySelector('.select-date-btn');
+const singleRoom = document.querySelector('.single-room');
+const juniorSuite = document.querySelector('.junior-suite');
+const residential = document.querySelector('.residential');
+const suite = document.querySelector('.suite');
 
 //Global Variables👇
 const currentGuest = {
@@ -39,6 +50,7 @@ const currentGuest = {
 let customerData;
 let bookingsData;
 let roomData;
+let selectedRoomType = null;
 
 //Event Listeners👇
 const fetchAllData = () => {
@@ -64,8 +76,35 @@ const fetchAllData = () => {
     });
 };
 
+//Helper Functions👇
+const handleDates = date => {
+  date.replaceAll('-', '/');
+};
+
+const removeHiddenClass = elements => {
+  elements.forEach(element => {
+    element.classList.remove('hidden');
+  });
+  return elements;
+};
+
+const addHiddenClass = elements => {
+  elements.forEach(element => {
+    element.classList.add('hidden');
+  });
+  return elements;
+};
+
 dashboardView.addEventListener('click', () => {
-  removeHiddenClass([bookRoomBtn, logoutBtn, welcomeUser, totalSpent]);
+  removeHiddenClass([
+    cardContainer,
+    bookRoomBtn,
+    logoutBtn,
+    welcomeUser,
+    totalSpent,
+  ]);
+  addHiddenClass([bookRoomOne]);
+  // document.body.classList.remove('show-room-container');
 
   // Calculate the total spent and update the totalSpent element
   const guestTotal = guestTotalSpent(currentGuest, bookingsData, roomData);
@@ -97,6 +136,47 @@ pastBookingsBtn.addEventListener('click', () => {
   console.log('Past Bookings:', pastBookings);
 
   displayBookings(pastBookings, roomData);
+});
+
+bookRoomBtn.addEventListener('click', () => {
+  console.log('Book Room Clicked');
+  removeHiddenClass([bookRoomOne]);
+  addHiddenClass([
+    cardContainer,
+    bookRoomBtn,
+    logoutBtn,
+    welcomeUser,
+    totalSpent,
+    dashboardView,
+  ]);
+  // document.body.classList.add('show-room-container');
+});
+
+singleRoom.addEventListener('click', () => {
+  selectedRoomType = 'single room';
+  console.log('Single Room Clicked');
+  // filterRoomsByType(roomData, type);
+  displaySearchResults();
+});
+
+juniorSuite.addEventListener('click', () => {
+  selectedRoomType = 'junior suite';
+  console.log('junior suite Clicked');
+  // filterRoomsByType(roomData, type);
+  displaySearchResults();
+});
+
+residential.addEventListener('click', () => {
+  selectedRoomType = 'residential suite';
+  console.log('residential Clicked');
+  // filterRoomsByType(roomData, type);
+  displaySearchResults();
+});
+
+suite.addEventListener('click', () => {
+  selectedRoomType = 'suite';
+  console.log('suite Clicked');
+  displaySearchResults();
 });
 
 // Call fetchAllData and loadUpcomingBookings when the page loads
@@ -147,21 +227,49 @@ function displayBookings(bookings, roomData) {
   });
 }
 
-//Helper Functions👇
-const handleDates = date => {
-  date.replaceAll('-', '/');
-};
+selectDateBtn.addEventListener('click', displaySearchResults);
 
-const removeHiddenClass = elements => {
-  elements.forEach(element => {
-    element.classList.remove('hidden');
-  });
-  return elements;
-};
+//
+function displaySearchResults() {
+  const searchDateValue = document.getElementById('dateOfStay').value;
+  const searchDate = searchDateValue.replaceAll('-', '/');
 
-const addHiddenClass = elements => {
-  elements.forEach(element => {
-    element.classList.add('hidden');
-  });
-  return elements;
-};
+  // Filter rooms by availability and selected room type if one is selected
+  let filteredRooms = allAvailableRooms(roomData, bookingsData, searchDate);
+
+  if (selectedRoomType !== null) {
+    filteredRooms = filteredRooms.filter(
+      room => room.roomType === selectedRoomType
+    );
+  }
+
+  if (filteredRooms.length === 0) {
+    // Handle case where no rooms match the criteria
+    roomContainer.innerHTML = `
+      <div class="no-rooms-available-message">
+        <p class="no-rooms-match">No Rooms Available</p>
+      </div>`;
+    cardContainer.classList.add('hidden');
+    roomContainer.classList.remove('hidden');
+  } else {
+    // Display the filtered rooms
+    cardContainer.classList.add('hidden');
+    roomContainer.classList.remove('hidden');
+
+    roomContainer.innerHTML = ''; // Clear existing content
+
+    filteredRooms.forEach(room => {
+      roomContainer.innerHTML += `
+        <div class="card-wrapper"> 
+          <div class="img-wrapper">
+            <img class="room-img" src="./images/${room.roomType}.jpg" alt="${room.roomType}" />
+          </div>
+          <div class="card room-details-wrapper">
+            <h3 class="room-type">${room.roomType}</h3>
+            <h4 class="bedsize">Bedsize: ${room.bedSize}</h4>
+            <p class="num-beds">Number of Beds: ${room.numBeds}</p>
+          </div>
+        </div>`;
+    });
+  }
+}

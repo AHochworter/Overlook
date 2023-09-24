@@ -1,5 +1,3 @@
-/* @import '~js-datepicker/dist/datepicker.min.css'  */
-
 /* font-family: 'Outfit', sans-serif;
 font-family: 'Roboto', sans-serif; */
 
@@ -146,13 +144,17 @@ header {
   height: 675px;
   flex-shrink: 0;
 }
+.room-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  /* background-color: aquamarine; */
+  width: 1250px;
+  height: 675px;
+  flex-shrink: 0;
+}
 
-.card-wrapper-01,
-.card-wrapper-02,
-.card-wrapper-03,
-.card-wrapper-04,
-.card-wrapper-05,
-.card-wrapper-06 {
+.card-wrapper {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -166,12 +168,7 @@ header {
   box-shadow: 0px 4px 4px 5px rgba(0, 0, 0, 0.3);
 }
 
-.img-wrapper-01,
-.img-wrapper-02,
-.img-wrapper-03,
-.img-wrapper-04,
-.img-wrapper-05,
-.img-wrapper-06 {
+.img-wrapper {
   display: flex;
   justify-content: center;
   align-items: center;

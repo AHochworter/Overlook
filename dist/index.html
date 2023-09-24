@@ -5,7 +5,7 @@
     <link rel="stylesheet" href="src/css/styles.css" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="datepicker.min.css" />
+    <!-- <link rel="stylesheet" href="datepicker.min.css" /> -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -26,7 +26,9 @@
       </div>
       <h1 class="overlook-heading">Overlook at Chimney Hollow</h1>
       <h2 class="welcome-user hidden" id="welcomeUser">Welcome Back!</h2>
-      <p class="total-spent hidden" id="totalSpent">Your total Spent is ${currentGuest.totalSpent}</p>
+      <p class="total-spent hidden" id="totalSpent">
+        Your total Spent is ${currentGuest.totalSpent}
+      </p>
       <button class="master-nav hidden" id="bookRoomBtn">Book Room</button>
       <button class="master-nav hidden" id="logOutBtn">Log Out</button>
       <button class="master-nav hidden" id="dashboard">Dashboard</button>
@@ -41,7 +43,6 @@
             <input type="password" id="password" value="" /><br />
             <input type="submit" class="login-btn" value="Login" />
           </form>
-          
         </div>
       </section>
       <section class="dashboard-view" id="dashboardView">
@@ -49,28 +50,27 @@
           <button class="dashboard-btn" id="upcomingBookings">Upcoming</button>
           <button class="dashboard-btn" id="pastBookings">Past Stays</button>
         </nav>
-        <div class="card-container" id="cardContainer">
-       </div>
+        <div class="card-container" id="cardContainer"></div>
       </section>
       <section class="book-a-room-step-one hidden" id="bookARoomOne">
         <nav class="book-a-room-one" id="navBookARoomOne">
-          <form 
+          <form>
             <label for="select-a-date">Book A Room</label>
-            <input type="date" id="dateOfStay" name="date-of-stay">
-            <input type="submit" class="select-date-btn" value="Search" />
+            <input type="date" id="dateOfStay" name="date-of-stay" />
+            <button type="button" class="select-date-btn">Search</button>
           </form>
           <button class="single-room" id="singleRoom">Single</button>
           <button class="junior-suite" id="juniorSuite">Junior Suite</button>
           <button class="residential" id="residential">Residential</button>
           <button class="suite" id="suite">Suite</button>
         </nav>
-        <div class="card-container" id="bookARoomOneContainer">
+        <div class="room-container" id="bookARoomOneContainer">
           <!-- Room cards go here! -->
         </div>
       </section>
       <section class="book-a-room-step-two" id="bookARoomTwo"></section>
     </main>
-     <!-- Do not include the scripts.js or class files here - it is done by the webpack server -->
+    <!-- Do not include the scripts.js or class files here - it is done by the webpack server -->
     <script src="bundle.js"></script>
   </body>
 </html>
