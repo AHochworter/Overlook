@@ -22,6 +22,8 @@ import './images/residential.jpg';
 //Query Selectors 👇
 const dashboardView = document.getElementById('dashboardView');
 const cardContainer = document.getElementById('cardContainer');
+const welcomeUser = document.getElementById('welcomeUser');
+const totalSpent = document.getElementById('totalSpent');
 
 //BUTTONS
 const upcomingBookingsBtn = document.getElementById('upcomingBookings');
@@ -63,7 +65,14 @@ const fetchAllData = () => {
 };
 
 dashboardView.addEventListener('click', () => {
-  removeHiddenClass([bookRoomBtn, logoutBtn]);
+  removeHiddenClass([bookRoomBtn, logoutBtn, welcomeUser, totalSpent]);
+
+  // Calculate the total spent and update the totalSpent element
+  const guestTotal = guestTotalSpent(currentGuest, bookingsData, roomData);
+  totalSpent.textContent = `Your total Spent is $${guestTotal.toFixed(2)}`;
+
+  // Update the welcome message
+  welcomeUser.textContent = `Welcome Back ${currentGuest.name}!`;
 });
 
 upcomingBookingsBtn.addEventListener('click', () => {
