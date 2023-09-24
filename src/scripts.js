@@ -86,7 +86,7 @@ window.addEventListener('load', () => {
   fetchAllData()
     .then(() => {
       // Once data is fetched, load and display upcoming bookings
-      loadUpcomingBookings();
+      displayBookings(bookingsData, roomData);
     })
     .catch(error => {
       console.error('Error fetching data:', error);
@@ -94,21 +94,38 @@ window.addEventListener('load', () => {
 });
 
 // Function to display bookings in the cardContainer
-function displayBookings(bookings) {
-  // Clear the previous content in cardContainer
-  cardContainer.innerHTML = '';
-
-  // Loop through bookings and create card elements
-  bookings.forEach((booking, index) => {
-    const cardWrapper = document.createElement('div');
-    cardWrapper.classList.add('card-wrapper', `cardWrapper-${index + 1}`);
-
-    // Create and set card content as needed, e.g., room image, details, etc.
-    // You can use booking.room and booking.date to access the room and date info
-
-    cardContainer.appendChild(cardWrapper);
-  });
-}
+// function displayBookings(bookingsData, roomData) {
+//   // Clear the previous content in cardContainer
+//   cardContainer.innerHTML = '';
+//   // Filter bookings for the current guest
+//   const guestBookings = filterBookingsByGuest(currentGuest, bookingsData);
+//   // Loop through the guest's bookings and create card elements
+//   guestBookings.forEach(booking => {
+//     // Find the room details for this booking
+//     const roomDetails = bookingsByRoomByGuest(
+//       currentGuest,
+//       bookingsData,
+//       roomData
+//     ).find(item => item.date === booking.date);
+//     if (roomDetails) {
+//       // Create a card element for this booking and its room details
+//       // const cardElement = document.createElement('div');
+//       // cardElement.classList.add('card-wrapper');
+//       cardContainer.innerHTML = `
+//       <div class="card card-wrapper" id="cardWrapper">
+//         <div class="img-wrapper">
+//           <img class="room-img" src="./images/single room.jpg" alt="single room" />
+//         </div>
+//         <div class=" card room-details-wrapper">
+//           <h4 class="room-type">${roomDetails.room.roomType}</h4>
+//           <h3 class="bedsize">${roomDetails.room.bedSize}</h3>
+//           <p class="num-beds">${roomDetails.room.numBeds}</p>
+//         </div>
+//       </div>
+//       `;
+//     }
+//   });
+// }
 
 // Function to load and display upcoming bookings
 function loadUpcomingBookings() {
@@ -118,6 +135,43 @@ function loadUpcomingBookings() {
     roomData
   );
   displayBookings(upcomingBookings);
+}
+
+function displayBookings(bookingsData, roomData) {
+  // Clear the previous content in cardContainer
+  cardContainer.innerHTML = '';
+
+  // Filter bookings for the current guest
+  const guestBookings = filterBookingsByGuest(currentGuest, bookingsData);
+
+  // Loop through the guest's bookings and create card elements
+  guestBookings.forEach(booking => {
+    // Find the room details for this booking
+    const roomDetails = bookingsByRoomByGuest(
+      currentGuest,
+      bookingsData,
+      roomData
+    ).find(item => item.date === booking.date);
+
+    if (roomDetails) {
+      // Create a card element for this booking and its room details
+      const cardElement = document.createElement('div');
+      cardElement.classList.add('card', 'card-wrapper'); // Add classes to the card element
+      cardElement.innerHTML = `
+        <div class="img-wrapper">
+          <img class="room-img" src="./images/single room.jpg" alt="single room" />
+        </div>
+        <div class="card room-details-wrapper">
+          <h3 class="room-type">Room: ${roomDetails.room.roomType}</h3>
+          <h4 class="bedsize">Bedsize: ${roomDetails.room.bedSize}</h4>
+          <p class="num-beds">Number of Beds: ${roomDetails.room.numBeds}</p>
+        </div>
+      `;
+
+      // Append the card element to the cardContainer
+      cardContainer.appendChild(cardElement);
+    }
+  });
 }
 
 //Helper Functions👇
