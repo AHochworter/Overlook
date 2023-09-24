@@ -8,7 +8,8 @@ import {
   guestComingBookings,
   guestTotalSpent,
 } from '../src/guest-bookings';
-import { allUpcomingBookings, allAvailableRooms } from '../src/new-bookings';
+import { allAvailableRooms } from '../src/new-bookings';
+import { filterRoomsByType } from '../src/filter-rooms';
 
 // An example of how you tell webpack to use a CSS (SCSS) file
 import './css/styles.css';
@@ -18,7 +19,8 @@ import './images/overlook-logo.jpg';
 import './images/village-on-lake.jpg';
 import './images/single room.jpg';
 import './images/junior suite.jpg';
-import './images/residential.jpg';
+import './images/residential suite.jpg';
+import './images/suite.jpg';
 
 //Query Selectors 👇
 const dashboardView = document.getElementById('dashboardView');
@@ -35,6 +37,10 @@ const pastBookingsBtn = document.getElementById('pastBookings');
 const bookRoomBtn = document.getElementById('bookRoomBtn');
 const logoutBtn = document.getElementById('logOutBtn');
 const selectDateBtn = document.querySelector('.select-date-btn');
+const singleRoom = document.querySelector('.single-room');
+const juniorSuite = document.querySelector('.junior-suite');
+const residential = document.querySelector('.residential');
+const suite = document.querySelector('.suite');
 
 //Global Variables👇
 const currentGuest = {
@@ -44,6 +50,7 @@ const currentGuest = {
 let customerData;
 let bookingsData;
 let roomData;
+let selectedRoomType = null;
 
 //Event Listeners👇
 const fetchAllData = () => {
@@ -145,6 +152,33 @@ bookRoomBtn.addEventListener('click', () => {
   // document.body.classList.add('show-room-container');
 });
 
+singleRoom.addEventListener('click', () => {
+  selectedRoomType = 'single room';
+  console.log('Single Room Clicked');
+  // filterRoomsByType(roomData, type);
+  displaySearchResults();
+});
+
+juniorSuite.addEventListener('click', () => {
+  selectedRoomType = 'junior suite';
+  console.log('junior suite Clicked');
+  // filterRoomsByType(roomData, type);
+  displaySearchResults();
+});
+
+residential.addEventListener('click', () => {
+  selectedRoomType = 'residential suite';
+  console.log('residential Clicked');
+  // filterRoomsByType(roomData, type);
+  displaySearchResults();
+});
+
+suite.addEventListener('click', () => {
+  selectedRoomType = 'suite';
+  console.log('suite Clicked');
+  displaySearchResults();
+});
+
 // Call fetchAllData and loadUpcomingBookings when the page loads
 window.addEventListener('load', () => {
   // Fetch all data before displaying bookings
@@ -193,46 +227,49 @@ function displayBookings(bookings, roomData) {
   });
 }
 
-selectDateBtn.addEventListener('click', () => {
+selectDateBtn.addEventListener('click', displaySearchResults);
+
+//
+function displaySearchResults() {
   const searchDateValue = document.getElementById('dateOfStay').value;
-  console.log(searchDateValue);
-  const searchDate = searchDateValue.replaceAll('-', '/'); //need to format the date to be 11/12/2023 instead of 11-12-2023
-  console.log(searchDate);
+  const searchDate = searchDateValue.replaceAll('-', '/');
 
-  const roomsAvailable = allAvailableRooms(roomData, bookingsData, searchDate);
-  console.log(roomsAvailable);
+  // Filter rooms by availability and selected room type if one is selected
+  let filteredRooms = allAvailableRooms(roomData, bookingsData, searchDate);
 
-  if (roomsAvailable.length === 0) {
-    console.log('No rooms Available');
-    // Correct the condition here
+  if (selectedRoomType !== null) {
+    filteredRooms = filteredRooms.filter(
+      room => room.roomType === selectedRoomType
+    );
+  }
+
+  if (filteredRooms.length === 0) {
+    // Handle case where no rooms match the criteria
     roomContainer.innerHTML = `
       <div class="no-rooms-available-message">
         <p class="no-rooms-match">No Rooms Available</p>
       </div>`;
-
-    // Hide cardContainer and show roomContainer
     cardContainer.classList.add('hidden');
     roomContainer.classList.remove('hidden');
   } else {
-    console.log('Rooms Available');
+    // Display the filtered rooms
     cardContainer.classList.add('hidden');
     roomContainer.classList.remove('hidden');
 
-    roomsAvailable.forEach(room => {
-      roomContainer.innerHTML += `
-      <div class="card-wrapper"> 
-        <div class="img-wrapper">
-          <img class="room-img" src="./images/single room.jpg" alt="single room" />
-        </div>
-        <div class="card room-details-wrapper">
-          <h3 class="room-type">Room: ${room.roomType}</h3>
-          <h4 class="bedsize">Bedsize: ${room.bedSize}</h4>
-          <p class="num-beds">Number of Beds: ${room.numBeds}</p>
-     
-      </div>`;
-    });
-    roomContainer.innerHTML += `</div>`;
+    roomContainer.innerHTML = ''; // Clear existing content
 
-    // Show cardContainer and hide roomContainer
+    filteredRooms.forEach(room => {
+      roomContainer.innerHTML += `
+        <div class="card-wrapper"> 
+          <div class="img-wrapper">
+            <img class="room-img" src="./images/${room.roomType}.jpg" alt="${room.roomType}" />
+          </div>
+          <div class="card room-details-wrapper">
+            <h3 class="room-type">${room.roomType}</h3>
+            <h4 class="bedsize">Bedsize: ${room.bedSize}</h4>
+            <p class="num-beds">Number of Beds: ${room.numBeds}</p>
+          </div>
+        </div>`;
+    });
   }
-});
+}

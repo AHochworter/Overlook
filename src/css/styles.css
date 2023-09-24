@@ -148,14 +148,11 @@ header {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-evenly;
-  background-color: aquamarine;
+  /* background-color: aquamarine; */
   width: 1250px;
   height: 675px;
   flex-shrink: 0;
 }
-/* .show-room-container .room-container {
-  display: flex;
-} */
 
 .card-wrapper {
   display: flex;
