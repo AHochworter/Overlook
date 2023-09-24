@@ -36,6 +36,7 @@ const upcomingBookingsBtn = document.getElementById('upcomingBookings');
 const pastBookingsBtn = document.getElementById('pastBookings');
 const bookRoomBtn = document.getElementById('bookRoomBtn');
 const logoutBtn = document.getElementById('logOutBtn');
+const dashboardBtn = document.getElementById('dashboard');
 const selectDateBtn = document.querySelector('.select-date-btn');
 const singleRoom = document.querySelector('.single-room');
 const juniorSuite = document.querySelector('.junior-suite');
@@ -140,7 +141,7 @@ pastBookingsBtn.addEventListener('click', () => {
 
 bookRoomBtn.addEventListener('click', () => {
   console.log('Book Room Clicked');
-  removeHiddenClass([bookRoomOne]);
+  removeHiddenClass([bookRoomOne, logoutBtn, dashboardBtn]);
   addHiddenClass([
     cardContainer,
     bookRoomBtn,
