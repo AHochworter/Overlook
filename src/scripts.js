@@ -399,6 +399,9 @@ const displaySelectedBooking = selectedRoom => {
           <p class="card-booking-text roomCost" id="${
             selectedRoom.number
           }">Cost Per Night: $${selectedRoom.costPerNight}</p>
+          <p class="reservation-message hidden">Thank you ${
+            currentGuest.name
+          }! Your Reservation has been booked.</p>
           <button class="reserve bookBtn" id="${
             selectedRoom.number
           }">Reserve Now</button>
@@ -422,5 +425,15 @@ const handleReservation = selectedRoom => {
     date: '2019/09/23', // Replace with the selected date
     roomNumber: selectedRoom.number, // Use the room number of the selected room
   };
+
+  const reserveButton = selectedRoomContainer.querySelector('.reserve');
+  reserveButton.classList.add('hidden');
+
+  // Unhide the reservation message
+  const reservationMessage = selectedRoomContainer.querySelector(
+    '.reservation-message'
+  );
+  reservationMessage.classList.remove('hidden');
+
   sendBookingToServer(bookingData);
 };
