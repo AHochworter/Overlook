@@ -154,13 +154,23 @@ header {
   flex-shrink: 0;
 }
 
+/* .selected-room {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  background-color: aquamarine;
+  width: 1250px;
+  height: 675px;
+  flex-shrink: 0;
+} */
+
 .card-wrapper {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
   width: 325px;
-  height: 300px;
+  height: 325px;
   flex-shrink: 0;
   margin: 15px 15px 15px 15px;
   border-radius: 5px;
@@ -185,7 +195,22 @@ header {
   width: auto;
   height: auto;
 }
-
+.bookBtn,
+.close {
+  width: 125px;
+  height: 35px;
+  flex-shrink: 0;
+  border-radius: 83px;
+  background: #531a1a;
+  color: #ffffff;
+}
+.small-img {
+  display: flex;
+  max-width: 265px;
+  max-height: 135px;
+  width: auto;
+  height: auto;
+}
 .hidden {
   display: none;
 }

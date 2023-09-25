@@ -8,7 +8,7 @@ import {
   guestComingBookings,
   guestTotalSpent,
 } from '../src/guest-bookings';
-import { allAvailableRooms } from '../src/new-bookings';
+import { allAvailableRooms, findSelectedRoom } from '../src/new-bookings';
 import { filterRoomsByType } from '../src/filter-rooms';
 
 // An example of how you tell webpack to use a CSS (SCSS) file
@@ -21,6 +21,8 @@ import './images/single room.jpg';
 import './images/junior suite.jpg';
 import './images/residential suite.jpg';
 import './images/suite.jpg';
+import './images/room1.jpg';
+import './images/room2.jpg';
 
 //Query Selectors 👇
 const dashboardView = document.getElementById('dashboardView');
@@ -29,7 +31,9 @@ const roomContainer = document.querySelector('.room-container');
 const welcomeUser = document.getElementById('welcomeUser');
 const totalSpent = document.getElementById('totalSpent');
 const bookRoomOne = document.getElementById('bookARoomOne');
-const searchForm = document.querySelector('form');
+// const searchForm = document.querySelector('form');
+const bookRoomTwo = document.getElementById('bookARoomTwo');
+const selectedRoomContainer = document.querySelector('.selected-room');
 
 //BUTTONS
 const upcomingBookingsBtn = document.getElementById('upcomingBookings');
@@ -145,7 +149,6 @@ bookRoomBtn.addEventListener('click', () => {
   addHiddenClass([
     cardContainer,
     bookRoomBtn,
-    logoutBtn,
     welcomeUser,
     totalSpent,
     dashboardView,
@@ -266,11 +269,75 @@ function displaySearchResults() {
             <img class="room-img" src="./images/${room.roomType}.jpg" alt="${room.roomType}" />
           </div>
           <div class="card room-details-wrapper">
-            <h3 class="room-type">${room.roomType}</h3>
-            <h4 class="bedsize">Bedsize: ${room.bedSize}</h4>
-            <p class="num-beds">Number of Beds: ${room.numBeds}</p>
+          <h3 class="room-type">${room.roomType}</h3>
+          <h4 class="bedsize">Bedsize: ${room.bedSize}</h4>
+          <p class="num-beds">Number of Beds: ${room.numBeds}</p>
+          <button class="bookBtn">Book Now!</button>
           </div>
         </div>`;
     });
   }
 }
+
+roomContainer.addEventListener('click', event => {
+  if (event.target.classList.contains('bookBtn')) {
+    const roomCard = event.target.closest('.card-wrapper');
+    const roomType = roomCard.querySelector('.room-type').textContent;
+    // You can use the roomType or any other information you need to book the room.
+
+    // Find the selected room based on roomType (modify this logic if needed)
+    const selectedRoom = roomData.find(room => room.roomType === roomType);
+
+    if (selectedRoom) {
+      displaySelectedBooking(selectedRoom);
+    }
+  }
+});
+
+const bookNowHandler = (e, allRooms) => {
+  if (e.target.className === 'bookBtn') {
+    console.log(e.target.className === 'bookBtn');
+    // clearView([confirmationMsg, filterButtons]);
+    // toggleHidden('add', [results, resultsMsg]);
+    // toggleHidden('remove', [individualBookingView]);
+
+    const selectedRoom = findSelectedRoom(
+      e.target.nextElementSibling.id,
+      allRooms
+    );
+    displaySelectedBooking(e, selectedRoom[0]);
+  }
+};
+
+const displaySelectedBooking = selectedRoom => {
+  addHiddenClass([bookRoomOne]);
+  removeHiddenClass([bookRoomTwo]);
+
+  // Clear the content of selectedRoomContainer
+  selectedRoomContainer.innerHTML = '';
+
+  selectedRoomContainer.innerHTML = `
+    <article class="selected-room">
+      <img class="single-img" src="./images/${
+        selectedRoom.roomType
+      }.jpg" alt="hotel room image">
+      <div class="single-card-main-wrapper">
+        <div class="single-card-text-wrapper">
+          <h3 class="card-booking-text">We Look Forward to Your Visit.  You're Reserving:</h3>
+          <p class="card-booking-text roomType">${selectedRoom.roomType[0].toUpperCase()}${selectedRoom.roomType.substring(
+    1
+  )} with ${selectedRoom.numBeds} ${selectedRoom.bedSize} sized beds</p>
+          <p class="card-booking-text roomNumber">Room Number: ${
+            selectedRoom.number
+          }</p>
+          <p class="card-booking-text roomCost" id="${
+            selectedRoom.number
+          }">Cost Per Night: $${selectedRoom.costPerNight}</p>
+          <button class="reserve bookBtn" id="${
+            selectedRoom.number
+          }">Reserve Now</button>
+          <button class="close">Go Back</button>
+        </div>
+      </div>
+    </article>`;
+};
