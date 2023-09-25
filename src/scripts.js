@@ -322,14 +322,12 @@ function displaySearchResults() {
       roomContainer.innerHTML += `
         <div class="card-wrapper"> 
           <div class="img-wrapper">
-            <img class="room-img" src="./images/${room.roomType}.jpg" alt="${
-        room.roomType
-      }" />
+            <img class="room-img" src="./images/${room.roomType}.jpg" alt="${room.roomType}" />
           </div>
           <div class="card room-details-wrapper">
-          <h3 class="room-details room-type">${room.roomType.toUpperCase()}</h3>
-          <h4 class="room-details bedsize">Bedsize: ${room.bedSize}</h4>
-          <h4 class="room-details num-beds">Number of Beds: ${room.numBeds}</h4>
+          <h3 class="room-type">${room.roomType}</h3>
+          <h4 class="bedsize">Bedsize: ${room.bedSize}</h4>
+          <h4 class="num-beds">Number of Beds: ${room.numBeds}</h4>
           <button class="bookBtn">Book Now!</button>
           </div>
         </div>`;
