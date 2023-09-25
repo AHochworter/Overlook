@@ -173,8 +173,15 @@ pastBookingsBtn.addEventListener('click', () => {
   displayBookings(pastBookings, roomData);
 });
 
+logoutBtn.addEventListener('click', () => {
+  location.reload();
+});
+
 bookRoomBtn.addEventListener('click', () => {
   console.log('Book Room Clicked');
+  document.getElementById('dateOfStay').value = '';
+  roomContainer.innerHTML = '';
+
   removeHiddenClass([bookRoomOne, logoutBtn, dashboardBtn]);
   addHiddenClass([
     cardContainer,
@@ -184,7 +191,6 @@ bookRoomBtn.addEventListener('click', () => {
     dashboardView,
     selectedRoomContainer,
   ]);
-  // document.body.classList.add('show-room-container');
 });
 
 singleRoom.addEventListener('click', () => {
@@ -212,6 +218,18 @@ suite.addEventListener('click', () => {
   selectedRoomType = 'suite';
   console.log('suite Clicked');
   displaySearchResults();
+});
+
+dashboardBtn.addEventListener('click', () => {
+  console.log('Dashboard Button Clicked');
+  removeHiddenClass([
+    dashboardView,
+    cardContainer,
+    bookRoomBtn,
+    welcomeUser,
+    totalSpent,
+  ]);
+  addHiddenClass([loginView, bookRoomOne, bookRoomTwo, selectedRoomContainer]);
 });
 
 // Call fetchAllData and loadUpcomingBookings when the page loads
@@ -242,23 +260,29 @@ function displayBookings(bookings, roomData) {
     ).find(item => item.date === booking.date);
 
     if (roomDetails) {
-      // Create a card element for this booking and its room details
-      const cardElement = document.createElement('div');
-      cardElement.classList.add('card', 'card-wrapper'); // Add classes to the card element
-      cardElement.innerHTML = `
-      
+      cardContainer.innerHTML += `
+      <div class="card-wrapper"> 
         <div class="img-wrapper">
-          <img class="room-img" src="./images/single room.jpg" alt="single room" />
+          <img class="room-img" src="./images/${
+            roomDetails.room.roomType
+          }.jpg" alt="${roomDetails.room.roomType}" />
         </div>
         <div class="card room-details-wrapper">
-          <h3 class="room-type">Room: ${roomDetails.room.roomType}</h3>
-          <h4 class="bedsize">Bedsize: ${roomDetails.room.bedSize}</h4>
-          <p class="num-beds">Number of Beds: ${roomDetails.room.numBeds}</p>
-        </div>
-      `;
-
-      // Append the card element to the cardContainer
-      cardContainer.appendChild(cardElement);
+        <h3 class="room-type">${roomDetails.room.roomType.toUpperCase()}</h3>
+        <h4 class="room-details room-number">Room Number: ${
+          roomDetails.room.number
+        }</h4>
+        <h4 class="room-details bedsize">Bedsize: ${
+          roomDetails.room.bedSize
+        }</h4>
+        <h4 class="room-details num-beds">Number of Beds: ${
+          roomDetails.room.numBeds
+        }</h4>
+        <h4 class="room-details room-cost">Cost Per Night: ${
+          roomDetails.room.costPerNight
+        }</h4>
+      </div>
+    </div>`;
     }
   });
 }
@@ -298,12 +322,14 @@ function displaySearchResults() {
       roomContainer.innerHTML += `
         <div class="card-wrapper"> 
           <div class="img-wrapper">
-            <img class="room-img" src="./images/${room.roomType}.jpg" alt="${room.roomType}" />
+            <img class="room-img" src="./images/${room.roomType}.jpg" alt="${
+        room.roomType
+      }" />
           </div>
           <div class="card room-details-wrapper">
-          <h3 class="room-type">${room.roomType}</h3>
-          <h4 class="bedsize">Bedsize: ${room.bedSize}</h4>
-          <p class="num-beds">Number of Beds: ${room.numBeds}</p>
+          <h3 class="room-details room-type">${room.roomType.toUpperCase()}</h3>
+          <h4 class="room-details bedsize">Bedsize: ${room.bedSize}</h4>
+          <h4 class="room-details num-beds">Number of Beds: ${room.numBeds}</h4>
           <button class="bookBtn">Book Now!</button>
           </div>
         </div>`;
@@ -325,21 +351,6 @@ roomContainer.addEventListener('click', event => {
     }
   }
 });
-
-const bookNowHandler = (e, allRooms) => {
-  if (e.target.className === 'bookBtn') {
-    console.log(e.target.className === 'bookBtn');
-    // clearView([confirmationMsg, filterButtons]);
-    // toggleHidden('add', [results, resultsMsg]);
-    // toggleHidden('remove', [individualBookingView]);
-
-    const selectedRoom = findSelectedRoom(
-      e.target.nextElementSibling.id,
-      allRooms
-    );
-    displaySelectedBooking(e, selectedRoom[0]);
-  }
-};
 
 const displaySelectedBooking = selectedRoom => {
   addHiddenClass([bookRoomOne]);

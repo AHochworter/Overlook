@@ -99,7 +99,7 @@ header {
   flex-direction: column;
   align-items: center;
   width: 1395px;
-  height: 800px;
+  height: 850px;
   flex-shrink: 0;
   border-radius: 10px;
   background: rgba(217, 217, 217, 0.5);
@@ -141,17 +141,26 @@ header {
   flex-wrap: wrap;
   justify-content: space-evenly;
   /* background-color: aquamarine; */
+  overflow-y: auto;
   width: 1250px;
-  height: 675px;
+  height: 700px;
   flex-shrink: 0;
 }
+
+.room-details {
+  font-family: 'Roboto', sans-serif;
+  font-size: 14px;
+  line-height: 0.5;
+}
+
 .room-container {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-evenly;
   /* background-color: aquamarine; */
+  overflow-y: auto;
   width: 1250px;
-  height: 675px;
+  height: 725px;
   flex-shrink: 0;
 }
 
