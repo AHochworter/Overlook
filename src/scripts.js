@@ -61,6 +61,7 @@ let customerData;
 let bookingsData;
 let roomData;
 let selectedRoomType = null;
+let searchDate;
 
 //Event Listeners👇
 const fetchAllData = () => {
@@ -297,7 +298,7 @@ selectDateBtn.addEventListener('click', displaySearchResults);
 //
 function displaySearchResults() {
   const searchDateValue = document.getElementById('dateOfStay').value;
-  const searchDate = searchDateValue.replaceAll('-', '/');
+  searchDate = searchDateValue.replaceAll('-', '/');
 
   // Filter rooms by availability and selected room type if one is selected
   let filteredRooms = allAvailableRooms(roomData, bookingsData, searchDate);
@@ -413,16 +414,16 @@ const displaySelectedBooking = selectedRoom => {
   const reserveButton = selectedRoomContainer.querySelector('.reserve.bookBtn');
   reserveButton.addEventListener('click', () => {
     // Step 10: Handle reservation
-    handleReservation(selectedRoom);
+    handleReservation(selectedRoom, searchDate);
   });
 };
 
-const handleReservation = selectedRoom => {
+const handleReservation = (selectedRoom, searchDate) => {
   console.log('reserve button clicked');
   // Gather the data for the POST
   const bookingData = {
     userID: currentGuest.id, // Use the guest's ID or user ID
-    date: '2023/09/29', // Replace with the selected date
+    date: searchDate, // Replace with the selected date
     roomNumber: selectedRoom.number, // Use the room number of the selected room
   };
 
