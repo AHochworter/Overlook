@@ -26,4 +26,10 @@ const allAvailableRooms = (allRooms, allBookings, currentDate) => {
   return availableRooms;
 };
 
-export { allUpcomingBookings, allAvailableRooms };
+const findSelectedRoom = (roomNumber, allRooms) => {
+  return allRooms.rooms.filter(room => {
+    return room.number === parseInt(roomNumber);
+  });
+};
+
+export { allUpcomingBookings, allAvailableRooms, findSelectedRoom };
