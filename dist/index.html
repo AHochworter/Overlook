@@ -34,18 +34,18 @@
       <button class="master-nav hidden" id="dashboard">Dashboard</button>
     </header>
     <main>
-      <section class="login-view hidden" id="loginView">
+      <section class="login-view" id="loginView">
         <div class="login-wrapper" id="loginWrapper">
           <form class="login-form" id="loginForm">
             <label class="username">Username</label><br />
             <input type="text" id="username" value="" /><br />
             <label class="password">Password</label><br />
             <input type="password" id="password" value="" /><br />
-            <input type="submit" class="login-btn" value="Login" />
+            <button type="button" class="login-btn">Login</button>
           </form>
         </div>
       </section>
-      <section class="dashboard-view" id="dashboardView">
+      <section class="dashboard-view hidden" id="dashboardView">
         <nav class="dashboard-view-nav" id="navDashboard">
           <button class="dashboard-btn" id="upcomingBookings">Upcoming</button>
           <button class="dashboard-btn" id="pastBookings">Past Stays</button>
@@ -68,7 +68,7 @@
           <!-- Room cards go here! -->
         </div>
       </section>
-      <section class="book-a-room-step-two" id="bookARoomTwo">
+      <section class="book-a-room-step-two hidden" id="bookARoomTwo">
         <div class="selected-room" id="bookARoomtwoContainer">
       </section>
     </main>

@@ -272,4 +272,8 @@ describe('determine availability', function () {
       },
     ]);
   });
+
+  it('findSelectedRoom should be a function', () => {
+    expect(findSelectedRoom).to.be.a('function');
+  });
 });

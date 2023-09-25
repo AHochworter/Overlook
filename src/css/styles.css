@@ -93,7 +93,8 @@ header {
 }
 
 .dashboard-view,
-.book-a-room-step-one {
+.book-a-room-step-one,
+.book-a-room-step-two {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -154,15 +155,17 @@ header {
   flex-shrink: 0;
 }
 
-/* .selected-room {
+.selected-room {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: space-evenly;
-  background-color: aquamarine;
-  width: 1250px;
-  height: 675px;
+  flex-direction: column;
+  align-items: center;
+  width: 703px;
+  height: 659px;
   flex-shrink: 0;
-} */
+  border-radius: 5px;
+  background: rgba(33, 29, 29, 0.2);
+  box-shadow: 0px 4px 4px 5px rgba(0, 0, 0, 0.3);
+}
 
 .card-wrapper {
   display: flex;
@@ -186,6 +189,20 @@ header {
   height: 175px;
   flex-shrink: 0;
   background-color: #0d0d0d;
+}
+
+.single-img-wrapper {
+  display: flex;
+  width: 587px;
+  height: 342px;
+  flex-shrink: 0;
+  background: #000;
+}
+
+.single-img {
+  width: 513px;
+  height: 342px;
+  flex-shrink: 0;
 }
 
 .room-img {
