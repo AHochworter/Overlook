@@ -108,8 +108,7 @@ dashboardView.addEventListener('click', () => {
     welcomeUser,
     totalSpent,
   ]);
-  addHiddenClass([bookRoomOne]);
-  // document.body.classList.remove('show-room-container');
+  addHiddenClass([bookRoomOne, bookRoomTwo, selectedRoomContainer]);
 
   // Calculate the total spent and update the totalSpent element
   const guestTotal = guestTotalSpent(currentGuest, bookingsData, roomData);
@@ -152,6 +151,7 @@ bookRoomBtn.addEventListener('click', () => {
     welcomeUser,
     totalSpent,
     dashboardView,
+    selectedRoomContainer,
   ]);
   // document.body.classList.add('show-room-container');
 });
@@ -311,16 +311,18 @@ const bookNowHandler = (e, allRooms) => {
 
 const displaySelectedBooking = selectedRoom => {
   addHiddenClass([bookRoomOne]);
-  removeHiddenClass([bookRoomTwo]);
+  removeHiddenClass([bookRoomTwo, selectedRoomContainer]);
 
   // Clear the content of selectedRoomContainer
   selectedRoomContainer.innerHTML = '';
 
   selectedRoomContainer.innerHTML = `
     <article class="selected-room">
-      <img class="single-img" src="./images/${
-        selectedRoom.roomType
-      }.jpg" alt="hotel room image">
+      <div class="single-img-wrapper">
+        <img class="single-img" src="./images/${
+          selectedRoom.roomType
+        }.jpg" alt="hotel room image">
+      </div>
       <div class="single-card-main-wrapper">
         <div class="single-card-text-wrapper">
           <h3 class="card-booking-text">We Look Forward to Your Visit.  You're Reserving:</h3>
