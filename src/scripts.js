@@ -422,7 +422,7 @@ const handleReservation = selectedRoom => {
   // Gather the data for the POST
   const bookingData = {
     userID: currentGuest.id, // Use the guest's ID or user ID
-    date: '2019/09/23', // Replace with the selected date
+    date: '2023/09/29', // Replace with the selected date
     roomNumber: selectedRoom.number, // Use the room number of the selected room
   };
 

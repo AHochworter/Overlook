@@ -56,7 +56,7 @@ export const sendBookingToServer = booking => {
   // Define the URL where you want to send the POST request
   const url = 'http://localhost:3001/api/v1/bookings';
 
-  // Create a fetch request with the booking data
+  // Create a fetch POST request with the booking data
   fetch(url, {
     method: 'POST',
     headers: {
@@ -66,19 +66,24 @@ export const sendBookingToServer = booking => {
   })
     .then(response => {
       if (response.ok) {
-        // Booking was successful, you can handle this as needed
-        // For example, show a success message to the user.
         console.log('Booking successful');
-        // You can update the UI or navigate to a confirmation page.
+
+        // After a successful POST, refresh the bookings data with a GET request
+        return fetch('http://localhost:3001/api/v1/bookings'); // Return the GET request
       } else {
         // Booking failed, handle the error here
         console.error('Booking failed');
-        // You can show an error message to the user.
+        throw new Error('Booking failed'); // Propagate the error for further handling
       }
+    })
+    .then(response => response.json()) // Parse the response from the GET request
+    .then(data => {
+      // Handle the refreshed bookings data here
+      console.log('Refreshed Bookings Data:', data);
+      // You can update your UI with the refreshed data
     })
     .catch(error => {
       console.error('Error sending booking:', error);
-      // Handle network errors or other issues here
-      // You can show an error message to the user.
+      // Handle errors (e.g., display an error message)
     });
 };
