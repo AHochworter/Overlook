@@ -1,6 +1,11 @@
 // This is the JavaScript entry file - your code begins here
 // Do not delete or rename this file ********
-import { fetchCustomers, fetchBookings, fetchRooms } from '../src/apiCalls';
+import {
+  fetchCustomers,
+  fetchBookings,
+  fetchRooms,
+  sendBookingToServer,
+} from '../src/apiCalls';
 import {
   filterBookingsByGuest,
   bookingsByRoomByGuest,
@@ -335,20 +340,38 @@ function displaySearchResults() {
   }
 }
 
+// roomContainer.addEventListener('click', event => {
+//   if (event.target.classList.contains('bookBtn')) {
+//     const roomCard = event.target.closest('.card-wrapper');
+//     const roomType = roomCard.querySelector('.room-type').textContent;
+//     // You can use the roomType or any other information you need to book the room.
+
+//     // Find the selected room based on roomType (modify this logic if needed)
+//     const selectedRoom = roomData.find(room => room.roomType === roomType);
+
+//     if (selectedRoom) {
+//       displaySelectedBooking(selectedRoom);
+//     }
+//   }
+// });
+
 roomContainer.addEventListener('click', event => {
   if (event.target.classList.contains('bookBtn')) {
-    const roomCard = event.target.closest('.card-wrapper');
-    const roomType = roomCard.querySelector('.room-type').textContent;
-    // You can use the roomType or any other information you need to book the room.
-
-    // Find the selected room based on roomType (modify this logic if needed)
-    const selectedRoom = roomData.find(room => room.roomType === roomType);
-
-    if (selectedRoom) {
-      displaySelectedBooking(selectedRoom);
-    }
+    // Handle room booking
+    handleRoomBooking(event);
   }
 });
+
+const handleRoomBooking = event => {
+  const roomCard = event.target.closest('.card-wrapper');
+  const roomType = roomCard.querySelector('.room-type').textContent;
+  const selectedRoom = roomData.find(room => room.roomType === roomType);
+
+  if (selectedRoom) {
+    // Display booking details for the selected room
+    displaySelectedBooking(selectedRoom);
+  }
+};
 
 const displaySelectedBooking = selectedRoom => {
   addHiddenClass([bookRoomOne]);
@@ -383,4 +406,21 @@ const displaySelectedBooking = selectedRoom => {
         </div>
       </div>
     </article>`;
+
+  const reserveButton = selectedRoomContainer.querySelector('.reserve.bookBtn');
+  reserveButton.addEventListener('click', () => {
+    // Step 10: Handle reservation
+    handleReservation(selectedRoom);
+  });
+};
+
+const handleReservation = selectedRoom => {
+  console.log('reserve button clicked');
+  // Gather the data for the POST
+  const bookingData = {
+    userID: currentGuest.id, // Use the guest's ID or user ID
+    date: '2019/09/23', // Replace with the selected date
+    roomNumber: selectedRoom.number, // Use the room number of the selected room
+  };
+  sendBookingToServer(bookingData);
 };
