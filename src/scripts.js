@@ -9,7 +9,7 @@ import {
   guestTotalSpent,
 } from '../src/guest-bookings';
 import { allAvailableRooms, findSelectedRoom } from '../src/new-bookings';
-import { filterRoomsByType } from '../src/filter-rooms';
+import { findGuest } from '../src/login';
 
 // An example of how you tell webpack to use a CSS (SCSS) file
 import './css/styles.css';
@@ -25,17 +25,20 @@ import './images/room1.jpg';
 import './images/room2.jpg';
 
 //Query Selectors 👇
+const loginView = document.querySelector('.login-view');
+const username = document.getElementById('username');
+const password = document.getElementById('password');
 const dashboardView = document.getElementById('dashboardView');
-const cardContainer = document.getElementById('cardContainer');
-const roomContainer = document.querySelector('.room-container');
+const bookRoomOne = document.getElementById('bookARoomOne');
+const bookRoomTwo = document.getElementById('bookARoomTwo');
 const welcomeUser = document.getElementById('welcomeUser');
 const totalSpent = document.getElementById('totalSpent');
-const bookRoomOne = document.getElementById('bookARoomOne');
-// const searchForm = document.querySelector('form');
-const bookRoomTwo = document.getElementById('bookARoomTwo');
+const cardContainer = document.getElementById('cardContainer');
+const roomContainer = document.querySelector('.room-container');
 const selectedRoomContainer = document.querySelector('.selected-room');
 
 //BUTTONS
+const loginBtn = document.querySelector('.login-btn');
 const upcomingBookingsBtn = document.getElementById('upcomingBookings');
 const pastBookingsBtn = document.getElementById('pastBookings');
 const bookRoomBtn = document.getElementById('bookRoomBtn');
@@ -48,10 +51,7 @@ const residential = document.querySelector('.residential');
 const suite = document.querySelector('.suite');
 
 //Global Variables👇
-const currentGuest = {
-  id: 17,
-  name: 'Trudie Grimes',
-};
+let currentGuest;
 let customerData;
 let bookingsData;
 let roomData;
@@ -100,23 +100,54 @@ const addHiddenClass = elements => {
   return elements;
 };
 
-dashboardView.addEventListener('click', () => {
-  removeHiddenClass([
-    cardContainer,
-    bookRoomBtn,
-    logoutBtn,
-    welcomeUser,
-    totalSpent,
-  ]);
-  addHiddenClass([bookRoomOne, bookRoomTwo, selectedRoomContainer]);
+loginBtn.addEventListener('click', event => {
+  event.preventDefault(); // Prevent the default form submission behavior
+  console.log('login button clicked');
+  const enteredUsername = username.value;
+  const enteredPassword = password.value;
 
-  // Calculate the total spent and update the totalSpent element
-  const guestTotal = guestTotalSpent(currentGuest, bookingsData, roomData);
-  totalSpent.textContent = `Your total Spent is $${guestTotal.toFixed(2)}`;
+  if (verifyLogin(enteredUsername, enteredPassword, customerData)) {
+    // Login is successful, set currentGuest and update the UI
+    currentGuest = findGuest(enteredUsername, enteredPassword, customerData);
+    console.log(currentGuest);
+    removeHiddenClass([
+      dashboardView,
+      cardContainer,
+      bookRoomBtn,
+      logoutBtn,
+      welcomeUser,
+      totalSpent,
+    ]);
+    addHiddenClass([
+      loginView,
+      bookRoomOne,
+      bookRoomTwo,
+      selectedRoomContainer,
+    ]);
 
-  // Update the welcome message
-  welcomeUser.textContent = `Welcome Back ${currentGuest.name}!`;
+    // Calculate the total spent and update the totalSpent element
+    const guestTotal = guestTotalSpent(currentGuest, bookingsData, roomData);
+    totalSpent.textContent = `Your total Spent is $${guestTotal.toFixed(2)}`;
+
+    // Update the welcome message
+    welcomeUser.textContent = `Welcome Back ${currentGuest.name}!`;
+  } else {
+    // Login failed, you can display an error message here
+    console.log('Login failed');
+    // Display an error message to the user, e.g., by modifying the DOM
+  }
 });
+
+const verifyLogin = (username, password, customerData) => {
+  const user = findGuest(username, password, customerData);
+
+  if (user) {
+    currentGuest = user; // Set the currentGuest upon successful login
+    return true; // Return true to indicate successful login
+  } else {
+    return false; // Return false to indicate failed login
+  }
+};
 
 upcomingBookingsBtn.addEventListener('click', () => {
   console.log('Upcoming was clicked');
@@ -188,8 +219,9 @@ window.addEventListener('load', () => {
   // Fetch all data before displaying bookings
   fetchAllData()
     .then(() => {
-      // Once data is fetched, load and display upcoming bookings
-      displayBookings(bookingsData, roomData);
+      if (currentGuest) {
+        displayBookings(bookingsData, roomData);
+      }
     })
     .catch(error => {
       console.error('Error fetching data:', error);

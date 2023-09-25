@@ -21,16 +21,16 @@ const findGuest = (username, password, customerData) => {
 };
 
 // Function to validate login credentials
-const verifyLogin = (username, password) => {
-  const user = findGuest(username, password);
+// const verifyLogin = (username, password, customerData) => {
+//   const user = findGuest(username, password, customerData);
 
-  if (user) {
-    currentGuest = user; // Set the currentGuest upon successful login
-    console.log(currentGuest);
-    return true; // Return true to indicate successful login
-  } else {
-    return false; // Return false to indicate failed login
-  }
-};
+//   if (user) {
+//     currentGuest = user; // Set the currentGuest upon successful login
+//     console.log(currentGuest);
+//     return true; // Return true to indicate successful login
+//   } else {
+//     return false; // Return false to indicate failed login
+//   }
+// };
 
-export { findGuest, verifyLogin };
+export { findGuest };
