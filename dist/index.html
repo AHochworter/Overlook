@@ -42,6 +42,8 @@
             <label class="password">Password</label><br />
             <input type="password" id="password" value="" /><br />
             <button type="button" class="login-btn">Login</button>
+            <div id="errorMessage" class="error-message"></div>
+
           </form>
         </div>
       </section>
@@ -54,11 +56,14 @@
       </section>
       <section class="book-a-room-step-one hidden" id="bookARoomOne">
         <nav class="book-a-room-one" id="navBookARoomOne">
-          <form>
-            <label for="select-a-date">Book A Room</label>
-            <input type="date" id="dateOfStay" name="date-of-stay" />
-            <button type="button" class="select-date-btn">Search</button>
-          </form>
+          <fieldset>
+            <legend>Book A Room</legend>
+            <form>
+              <label for="dateOfStay">Select a Date</label>
+              <input aria-label="select-a-date" type="date" id="dateOfStay" name="date-of-stay" />
+              <button type="button" class="select-date-btn">Search</button>
+            </form>
+          </fieldset>          
           <button class="single-room" id="singleRoom">Single</button>
           <button class="junior-suite" id="juniorSuite">Junior Suite</button>
           <button class="residential" id="residential">Residential</button>

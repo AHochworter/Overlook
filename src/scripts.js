@@ -112,7 +112,22 @@ loginBtn.addEventListener('click', event => {
   const enteredUsername = username.value;
   const enteredPassword = password.value;
 
-  if (verifyLogin(enteredUsername, enteredPassword, customerData)) {
+  // Check if the password field is empty
+  if (!enteredPassword) {
+    const errorMessageElement = document.getElementById('errorMessage');
+    errorMessageElement.textContent = 'Please enter a password.';
+    // You can style this error message as needed using CSS
+    return; // Stop further execution of the login process
+  }
+
+  // Check the login result
+  const loginResult = verifyLogin(
+    enteredUsername,
+    enteredPassword,
+    customerData
+  );
+
+  if (loginResult === true) {
     // Login is successful, set currentGuest and update the UI
     currentGuest = findGuest(enteredUsername, enteredPassword, customerData);
     console.log(currentGuest);
@@ -138,20 +153,33 @@ loginBtn.addEventListener('click', event => {
     // Update the welcome message
     welcomeUser.textContent = `Welcome Back ${currentGuest.name}!`;
   } else {
-    // Login failed, you can display an error message here
+    // Login failed, display an error message to the user
     console.log('Login failed');
-    // Display an error message to the user, e.g., by modifying the DOM
+    const errorMessageElement = document.getElementById('errorMessage');
+    errorMessageElement.textContent = loginResult; // Display the error message from verifyLogin
+    // You can style this error message as needed using CSS
   }
 });
 
 const verifyLogin = (username, password, customerData) => {
+  // Check if the provided password is empty or undefined
+  if (!password) {
+    return 'Please enter a password.'; // Return an error message
+  }
+
+  // Check if the provided password matches the expected password
+  if (password !== 'overlook2021') {
+    return 'Incorrect password. Please try again.'; // Return an error message
+  }
+
   const user = findGuest(username, password, customerData);
 
   if (user) {
     currentGuest = user; // Set the currentGuest upon successful login
+    console.log(currentGuest);
     return true; // Return true to indicate successful login
   } else {
-    return false; // Return false to indicate failed login
+    return 'User not found. Please check your username.'; // Return an error message
   }
 };
 
