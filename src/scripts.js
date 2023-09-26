@@ -318,7 +318,13 @@ function displayBookings(bookings, roomData) {
         </div>
         <div class="card room-details-wrapper">
         <h3 class="room-type">${roomDetails.room.roomType.toUpperCase()}</h3>
-        <h3 class="date-booked">Date: ${booking.date}</h3>
+        <h3 class="date-booked">Date: ${new Date(
+          booking.date
+        ).toLocaleDateString('en-US', {
+          year: 'numeric',
+          month: '2-digit',
+          day: '2-digit',
+        })}</h3>
         <h4 class="room-details room-number">Room Number: ${
           roomDetails.room.number
         }</h4>
@@ -381,10 +387,12 @@ function displaySearchResults() {
       roomContainer.innerHTML += `
         <div class="card-wrapper" data-room-number="${room.number}"> 
           <div class="img-wrapper">
-            <img class="room-img" src="./images/${room.roomType}.jpg" alt="${room.roomType}" />
+            <img class="room-img" src="./images/${room.roomType}.jpg" alt="${
+        room.roomType
+      }" />
           </div>
           <div class="card room-details-wrapper">
-          <h3 class="room-type">${room.roomType}</h3>
+          <h3 class="room-type">${room.roomType.toUpperCase()}</h3>
           <h3 class="room-number room-details">Room Number: ${room.number}</h3>
           <h4 class="bedsize room-details">Bedsize: ${room.bedSize}</h4>
           <h4 class="num-beds room-details">Number of Beds: ${room.numBeds}</h4>
@@ -430,7 +438,13 @@ const displaySelectedBooking = selectedRoom => {
       <div class="single-card-main-wrapper">
         <div class="single-card-text-wrapper">
           <h3 class="card-booking-text">We Look Forward to Your Visit!</h3>
-          <h3 class="date-booked">You are booking on: ${searchDate}</h3>
+          <h3 class="date-booked">Date: ${new Date(
+            searchDate
+          ).toLocaleDateString('en-US', {
+            year: 'numeric',
+            month: '2-digit',
+            day: '2-digit',
+          })}</h3>
           <p class="card-booking-text roomType">${selectedRoom.roomType[0].toUpperCase()}${selectedRoom.roomType.substring(
     1
   )} with ${selectedRoom.numBeds} ${selectedRoom.bedSize} sized beds</p>
