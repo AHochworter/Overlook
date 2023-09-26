@@ -20,27 +20,25 @@ const findGuest = (username, password, customerData) => {
   return undefined;
 };
 
-// Function to validate login credentials
-const verifyLogin = (username, password, customerData) => {
-  // Check if the provided password is empty or undefined
-  if (!password) {
-    return 'Please enter a password.'; // Return an error message
-  }
+// // Function to validate login credentials
+// const verifyLogin = (username, password, customerData) => {
+//   if (!password) {
+//     return 'Please enter a password.';
+//   }
 
-  // Check if the provided password matches the expected password
-  if (password !== 'overlook2021') {
-    return 'Incorrect password. Please try again.'; // Return an error message
-  }
+//   if (password !== 'overlook2021') {
+//     return 'Incorrect password. Please try again.';
+//   }
 
-  const user = findGuest(username, password, customerData);
+//   const user = findGuest(username, password, customerData);
 
-  if (user) {
-    currentGuest = user; // Set the currentGuest upon successful login
-    console.log(currentGuest);
-    return true; // Return true to indicate successful login
-  } else {
-    return 'User not found. Please check your username.'; // Return an error message
-  }
-};
+//   if (user) {
+//     currentGuest = user;
+//     console.log(currentGuest);
+//     return true;
+//   } else {
+//     return 'User not found. Please check your username.';
+//   }
+// };
 
 export { findGuest };
