@@ -54,6 +54,7 @@ const singleRoom = document.querySelector('.single-room');
 const juniorSuite = document.querySelector('.junior-suite');
 const residential = document.querySelector('.residential');
 const suite = document.querySelector('.suite');
+const allRoomTypes = document.querySelector('.all-room-types');
 
 //Global Variables👇
 let currentGuest;
@@ -76,11 +77,6 @@ const fetchAllData = () => {
       customerData = data[0].customers;
       bookingsData = data[1].bookings;
       roomData = data[2].rooms;
-
-      // // You can also log the data after assignment
-      // console.log('Assigned Customer Data:', customerData);
-      // console.log('Assigned Bookings Data:', bookingsData);
-      // console.log('Assigned Room Data:', roomData);
     })
     .catch(error => {
       console.error('Error fetching data:', error);
@@ -107,7 +103,7 @@ const addHiddenClass = elements => {
 };
 
 loginBtn.addEventListener('click', event => {
-  event.preventDefault(); // Prevent the default form submission behavior
+  event.preventDefault();
   console.log('login button clicked');
   const enteredUsername = username.value;
   const enteredPassword = password.value;
@@ -116,8 +112,7 @@ loginBtn.addEventListener('click', event => {
   if (!enteredPassword) {
     const errorMessageElement = document.getElementById('errorMessage');
     errorMessageElement.textContent = 'Please enter a password.';
-    // You can style this error message as needed using CSS
-    return; // Stop further execution of the login process
+    return;
   }
 
   // Check the login result
@@ -128,7 +123,6 @@ loginBtn.addEventListener('click', event => {
   );
 
   if (loginResult === true) {
-    // Login is successful, set currentGuest and update the UI
     currentGuest = findGuest(enteredUsername, enteredPassword, customerData);
     console.log(currentGuest);
     removeHiddenClass([
@@ -156,30 +150,27 @@ loginBtn.addEventListener('click', event => {
     // Login failed, display an error message to the user
     console.log('Login failed');
     const errorMessageElement = document.getElementById('errorMessage');
-    errorMessageElement.textContent = loginResult; // Display the error message from verifyLogin
-    // You can style this error message as needed using CSS
+    errorMessageElement.textContent = loginResult;
   }
 });
 
 const verifyLogin = (username, password, customerData) => {
-  // Check if the provided password is empty or undefined
   if (!password) {
-    return 'Please enter a password.'; // Return an error message
+    return 'Please enter a password.';
   }
 
-  // Check if the provided password matches the expected password
   if (password !== 'overlook2021') {
-    return 'Incorrect password. Please try again.'; // Return an error message
+    return 'Incorrect password. Please try again.';
   }
 
   const user = findGuest(username, password, customerData);
 
   if (user) {
-    currentGuest = user; // Set the currentGuest upon successful login
+    currentGuest = user;
     console.log(currentGuest);
-    return true; // Return true to indicate successful login
+    return true;
   } else {
-    return 'User not found. Please check your username.'; // Return an error message
+    return 'User not found. Please check your username.';
   }
 };
 
@@ -190,7 +181,6 @@ upcomingBookingsBtn.addEventListener('click', () => {
     bookingsData,
     roomData
   );
-
   // Log the upcoming bookings
   console.log('Upcoming Bookings:', upcomingBookings);
 
@@ -215,6 +205,7 @@ bookRoomBtn.addEventListener('click', () => {
   console.log('Book Room Clicked');
   document.getElementById('dateOfStay').value = '';
   roomContainer.innerHTML = '';
+  selectedRoomType = null;
 
   removeHiddenClass([bookRoomOne, logoutBtn, dashboardBtn]);
   addHiddenClass([
@@ -254,6 +245,12 @@ suite.addEventListener('click', () => {
   displaySearchResults();
 });
 
+allRoomTypes.addEventListener('click', () => {
+  selectedRoomType = null;
+  console.log('All Clicked');
+  displaySearchResults();
+});
+
 dashboardBtn.addEventListener('click', () => {
   console.log('Dashboard Button Clicked');
   removeHiddenClass([
@@ -263,7 +260,13 @@ dashboardBtn.addEventListener('click', () => {
     welcomeUser,
     totalSpent,
   ]);
-  addHiddenClass([loginView, bookRoomOne, bookRoomTwo, selectedRoomContainer]);
+  addHiddenClass([
+    loginView,
+    bookRoomOne,
+    bookRoomTwo,
+    selectedRoomContainer,
+    dashboardBtn,
+  ]);
 });
 
 // Call fetchAllData and loadUpcomingBookings when the page loads
@@ -295,8 +298,6 @@ function displayBookings(bookings, roomData) {
     ).find(item => item.date === booking.date);
 
     if (roomDetails) {
-      // console.log('item.date', item.date);
-      // console.log('booking.date', booking.date);
       cardContainer.innerHTML += `
       <div class="card-wrapper"> 
         <div class="img-wrapper">
@@ -363,8 +364,9 @@ function displaySearchResults() {
           </div>
           <div class="card room-details-wrapper">
           <h3 class="room-type">${room.roomType}</h3>
-          <h4 class="bedsize">Bedsize: ${room.bedSize}</h4>
-          <h4 class="num-beds">Number of Beds: ${room.numBeds}</h4>
+          <h3 class="room-number room-details">Room Number: ${room.number}</h3>
+          <h4 class="bedsize room-details">Bedsize: ${room.bedSize}</h4>
+          <h4 class="num-beds room-details">Number of Beds: ${room.numBeds}</h4>
           <button class="bookBtn">Book Now!</button>
           </div>
         </div>`;
@@ -422,8 +424,7 @@ const displaySelectedBooking = selectedRoom => {
           <button class="reserve bookBtn" id="${
             selectedRoom.number
           }">Reserve Now</button>
-          <button class="close">Go Back</button>
-        </div>
+          </div>
       </div>
     </article>`;
 
