@@ -15,21 +15,14 @@ main {
   justify-content: center;
 }
 
-header {
+.page-header {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  align-items: flex-start;
   width: 1395px;
   height: 175px;
   /* background-color: aqua; */
-}
-
-.logo-wrapper {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  /* background-color: blueviolet; */
-  width: 165px;
 }
 
 .img-logo {
@@ -43,6 +36,7 @@ header {
   font-family: 'Outfit', sans-serif;
   font-size: 45px;
   color: #c6a82b;
+  margin: 3px 5px 3px 5px;
 }
 
 .och-tagline {
@@ -54,13 +48,66 @@ header {
 .opening-img {
   width: 1395px;
   height: 700px;
+  background: lightgray 50% / cover no-repeat;
   /* background: './images/village-on-lake.jpg', lightgray 50% / cover no-repeat; */
+}
+
+.opening-message {
+  display: flex;
+  flex-direction: column;
+  height: 175px;
+}
+
+.master-buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+
+.logo-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* background-color: blueviolet; */
+  width: 165px;
+}
+
+.welcome-user {
+  display: flex;
+  justify-content: flex-start;
+  width: 645px;
+  height: 40px;
+  margin: 3px 5px 3px 5px;
+  flex-shrink: 0;
+  color: #531a1a;
+  text-align: center;
+  font-family: Roboto;
+  font-size: 25px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+
+.total-spent {
+  display: flex;
+  justify-content: flex-start;
+  width: 645px;
+  height: 35px;
+  margin: 3px 5px 3px 5px;
+  flex-shrink: 0;
+  color: #531a1a;
+  text-align: center;
+  font-family: Roboto;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
 }
 
 .login-wrapper {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   width: 412px;
   height: 481px;
@@ -82,20 +129,35 @@ header {
   box-shadow: 0px 4px 4px 5px rgba(0, 0, 0, 0.3);
 }
 
+/* BUTTONS */
 .login-btn,
 .master-nav {
   color: #ffffff;
-  width: 176px;
-  height: 50px;
+  font-size: 14px;
+  width: 150px;
+  height: 40px;
   flex-shrink: 0;
+  border: none;
   border-radius: 83px;
   background: #531a1a;
 }
 
 .dashboard-view,
-.book-a-room-step-one,
+.book-a-room-step-one {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 1395px;
+  height: 850px;
+  flex-shrink: 0;
+  border-radius: 10px;
+  background: rgba(217, 217, 217, 0.5);
+  box-shadow: 0px 4px 4px 5px rgba(0, 0, 0, 0.5);
+}
+
 .book-a-room-step-two {
   display: flex;
+  justify-content: center;
   flex-direction: column;
   align-items: center;
   width: 1395px;
@@ -116,7 +178,24 @@ header {
   height: 75px;
 }
 
-.dashboard-btn,
+/* BUTTONS */
+.dashboard-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 156px;
+  height: 35px;
+  border: none;
+  border-radius: 83px;
+  margin: 0px 10px 0px 10px;
+  background: #c6a82b;
+  color: #000;
+  font-family: 'Roboto', sans-serif;
+  font-size: 18px;
+  /* flex-shrink: 0; */
+}
+
+/* BUTTONS */
 .single-room,
 .junior-suite,
 .residential,
@@ -126,12 +205,13 @@ header {
   justify-content: center;
   align-items: center;
   flex-shrink: 0;
-  width: 156px;
-  height: 45px;
+  width: 140px;
+  height: 40px;
+  border: none;
   border-radius: 83px;
   margin: 0px 10px 0px 10px;
   background: #c6a82b;
-  color: #264910;
+  color: #000;
   font-family: 'Roboto', sans-serif;
   font-size: 18px;
   flex-shrink: 0;
@@ -161,6 +241,10 @@ header {
   line-height: 0.5;
 }
 
+form {
+  width: 425px;
+}
+
 fieldset {
   display: block;
   width: 375px;
@@ -179,9 +263,24 @@ fieldset {
 }
 
 .date-input {
-  font-size: 13px;
+  font-family: 'Roboto', sans-serif;
+  font-size: 14px;
   align-items: center;
-  width: 150px;
+  border: none;
+  border-radius: 15px;
+  height: 25px;
+  width: 200px;
+}
+
+.select-a-date {
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+}
+
+legend {
+  font-family: 'Roboto', sans-serif;
+  font-family: 'Outfit', sans-serif;
+  font-size: 16px;
 }
 
 .room-container {
@@ -197,6 +296,7 @@ fieldset {
 
 .selected-room {
   display: flex;
+  justify-content: center;
   flex-direction: column;
   align-items: center;
   width: 703px;
@@ -233,6 +333,9 @@ fieldset {
 
 .single-img-wrapper {
   display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   width: 587px;
   height: 342px;
   flex-shrink: 0;
@@ -240,6 +343,9 @@ fieldset {
 }
 
 .single-img {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 513px;
   height: 342px;
   flex-shrink: 0;
@@ -253,10 +359,11 @@ fieldset {
   height: auto;
 }
 .bookBtn,
-.close {
-  width: 125px;
-  height: 35px;
+.select-date-btn {
+  width: 120px;
+  height: 30px;
   flex-shrink: 0;
+  border: none;
   border-radius: 83px;
   background: #531a1a;
   color: #ffffff;

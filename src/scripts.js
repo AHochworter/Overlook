@@ -42,6 +42,7 @@ const cardContainer = document.getElementById('cardContainer');
 const roomContainer = document.querySelector('.room-container');
 const selectedRoomContainer = document.querySelector('.selected-room');
 const openingImage = document.querySelector('.opening-img');
+const selectDataForm = document.querySelector('.book-a-room-form');
 
 //BUTTONS
 const loginBtn = document.querySelector('.login-btn');
@@ -183,12 +184,17 @@ upcomingBookingsBtn.addEventListener('click', () => {
     bookingsData,
     roomData
   );
-  // Log the upcoming bookings
-  console.log('Upcoming Bookings:', upcomingBookings);
-
   addHiddenClass([openingImage]);
 
-  displayBookings(upcomingBookings, roomData);
+  if (upcomingBookings.length === 0) {
+    const message = 'You have no upcoming bookings.';
+
+    cardContainer.innerHTML += `<div class="display-message">
+    <h3>You Have Not Booked Any Upcoming Visits Yet.</h3>
+    </div>`;
+  } else {
+    displayBookings(upcomingBookings, roomData);
+  }
 });
 
 pastBookingsBtn.addEventListener('click', () => {
@@ -330,11 +336,23 @@ function displayBookings(bookings, roomData) {
   });
 }
 
-selectDateBtn.addEventListener('click', displaySearchResults);
+selectDataForm.addEventListener('submit', event => {
+  event.preventDefault();
+  displaySearchResults();
+});
 
-//
 function displaySearchResults() {
   const searchDateValue = document.getElementById('dateOfStay').value;
+
+  // Check if a date has been selected
+  if (!searchDateValue) {
+    roomContainer.innerHTML = `
+      <div class="no-date-selected-message">
+        <p class="no-dates-match">Please Select A Date</p>
+      </div>`;
+    return; // Exit the function early
+  }
+
   searchDate = searchDateValue.replaceAll('-', '/');
 
   // Filter rooms by availability and selected room type if one is selected

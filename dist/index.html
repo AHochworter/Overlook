@@ -24,26 +24,31 @@
         />
         <h2 class="och-tagline">Oh so different!</h2>
       </div>
-      <h1 class="overlook-heading">Overlook at Chimney Hollow</h1>
-      <h2 class="welcome-user hidden" id="welcomeUser">Welcome Back!</h2>
-      <p class="total-spent hidden" id="totalSpent">
+      <div class="opening-message">
+        <h1 class="overlook-heading">Overlook at Chimney Hollow</h1>
+        <h2 class="welcome-user hidden" id="welcomeUser">Welcome Back!</h2>
+        <h3 class="total-spent hidden" id="totalSpent">
         Your total Spent is ${currentGuest.totalSpent}
-      </p>
-      <button class="master-nav hidden" id="bookRoomBtn">Book Room</button>
-      <button class="master-nav hidden" id="logOutBtn">Log Out</button>
-      <button class="master-nav hidden" id="dashboard">Dashboard</button>
+      </h3>
+      </div>
+      <nav class="master-buttons">
+        <button class="master-nav hidden" id="bookRoomBtn">Book Room</button>
+        <button class="master-nav hidden" id="logOutBtn">Log Out</button>
+        <button class="master-nav hidden" id="dashboard">Dashboard</button>
+      </nav>
     </header>
     <main>
       <section class="login-view" id="loginView">
         <div class="login-wrapper" id="loginWrapper">
+          <h2 class="login-message" id="loginMessage">Welcome to the Overlook</h2>
+          <h2 class="login-message" id="loginPlease">Please Log In</h2>          
           <form class="login-form" id="loginForm">
-            <label class="username">Username</label><br />
+            <label for="username" class="username">Username</label><br />
             <input type="text" id="username" value="" /><br />
-            <label class="password">Password</label><br />
+            <label for="password" class="password">Password</label><br />
             <input type="password" id="password" value="" /><br />
             <button type="button" class="login-btn">Login</button>
-            <div id="errorMessage" class="error-message"></div>
-
+            <div class="error-message" id="errorMessage" ></div>
           </form>
         </div>
       </section>
@@ -62,15 +67,15 @@
             <legend>Book A Room</legend>
             <form class="book-a-room-form">
               <label class="select-a-date" for="dateOfStay">Select a Date</label>
-              <input class="date-input" aria-label="select-a-date" type="date" id="dateOfStay" name="date-of-stay" />
-              <button type="button" class="select-date-btn">Search</button>
+              <input class="date-input" aria-label="select-a-date" type="date" id="dateOfStay" name="date-of-stay" required/>
+              <button type="submit" class="select-date-btn">Search</button>
             </form>
           </fieldset>          
           <button class="single-room" id="singleRoom">Single</button>
           <button class="junior-suite" id="juniorSuite">Junior Suite</button>
           <button class="residential" id="residential">Residential</button>
           <button class="suite" id="suite">Suite</button>
-          <button class="all-room-types" id="suite">All</button>
+          <button class="all-room-types" id="allRoomTypes">All</button>
         </nav>
         <div class="room-container" id="bookARoomOneContainer">
           <!-- Room cards go here! -->
