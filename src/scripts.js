@@ -61,6 +61,7 @@ let customerData;
 let bookingsData;
 let roomData;
 let selectedRoomType = null;
+let searchDate;
 
 //Event Listeners👇
 const fetchAllData = () => {
@@ -76,10 +77,10 @@ const fetchAllData = () => {
       bookingsData = data[1].bookings;
       roomData = data[2].rooms;
 
-      // You can also log the data after assignment
-      console.log('Assigned Customer Data:', customerData);
-      console.log('Assigned Bookings Data:', bookingsData);
-      console.log('Assigned Room Data:', roomData);
+      // // You can also log the data after assignment
+      // console.log('Assigned Customer Data:', customerData);
+      // console.log('Assigned Bookings Data:', bookingsData);
+      // console.log('Assigned Room Data:', roomData);
     })
     .catch(error => {
       console.error('Error fetching data:', error);
@@ -265,6 +266,8 @@ function displayBookings(bookings, roomData) {
     ).find(item => item.date === booking.date);
 
     if (roomDetails) {
+      // console.log('item.date', item.date);
+      // console.log('booking.date', booking.date);
       cardContainer.innerHTML += `
       <div class="card-wrapper"> 
         <div class="img-wrapper">
@@ -297,7 +300,7 @@ selectDateBtn.addEventListener('click', displaySearchResults);
 //
 function displaySearchResults() {
   const searchDateValue = document.getElementById('dateOfStay').value;
-  const searchDate = searchDateValue.replaceAll('-', '/');
+  searchDate = searchDateValue.replaceAll('-', '/');
 
   // Filter rooms by availability and selected room type if one is selected
   let filteredRooms = allAvailableRooms(roomData, bookingsData, searchDate);
@@ -399,6 +402,9 @@ const displaySelectedBooking = selectedRoom => {
           <p class="card-booking-text roomCost" id="${
             selectedRoom.number
           }">Cost Per Night: $${selectedRoom.costPerNight}</p>
+          <p class="reservation-message hidden">Thank you ${
+            currentGuest.name
+          }! Your Reservation has been booked.</p>
           <button class="reserve bookBtn" id="${
             selectedRoom.number
           }">Reserve Now</button>
@@ -410,17 +416,32 @@ const displaySelectedBooking = selectedRoom => {
   const reserveButton = selectedRoomContainer.querySelector('.reserve.bookBtn');
   reserveButton.addEventListener('click', () => {
     // Step 10: Handle reservation
-    handleReservation(selectedRoom);
+    handleReservation(selectedRoom, searchDate);
   });
 };
 
-const handleReservation = selectedRoom => {
+const handleReservation = (selectedRoom, searchDate) => {
   console.log('reserve button clicked');
   // Gather the data for the POST
   const bookingData = {
     userID: currentGuest.id, // Use the guest's ID or user ID
-    date: '2019/09/23', // Replace with the selected date
+    date: searchDate, // Replace with the selected date
     roomNumber: selectedRoom.number, // Use the room number of the selected room
   };
-  sendBookingToServer(bookingData);
+
+  const reserveButton = selectedRoomContainer.querySelector('.reserve');
+  reserveButton.classList.add('hidden');
+
+  // Unhide the reservation message
+  const reservationMessage = selectedRoomContainer.querySelector(
+    '.reservation-message'
+  );
+  reservationMessage.classList.remove('hidden');
+
+  // Send the booking data to the server and update the UI with the refreshed bookings data
+  sendBookingToServer(bookingData, updatedBookingsData => {
+    // Assuming that updatedBookingsData is the refreshed bookings data
+    // You can update the UI with the updated bookings data here
+    displayBookings(updatedBookingsData);
+  });
 };
