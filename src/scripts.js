@@ -266,6 +266,8 @@ function displayBookings(bookings, roomData) {
     ).find(item => item.date === booking.date);
 
     if (roomDetails) {
+      // console.log('item.date', item.date);
+      // console.log('booking.date', booking.date);
       cardContainer.innerHTML += `
       <div class="card-wrapper"> 
         <div class="img-wrapper">
