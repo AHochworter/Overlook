@@ -381,7 +381,7 @@ function displaySearchResults() {
 
     filteredRooms.forEach(room => {
       roomContainer.innerHTML += `
-        <div class="card-wrapper"> 
+        <div class="card-wrapper" data-room-number="${room.number}"> 
           <div class="img-wrapper">
             <img class="room-img" src="./images/${room.roomType}.jpg" alt="${room.roomType}" />
           </div>
@@ -406,8 +406,8 @@ roomContainer.addEventListener('click', event => {
 
 const handleRoomBooking = event => {
   const roomCard = event.target.closest('.card-wrapper');
-  const roomType = roomCard.querySelector('.room-type').textContent;
-  const selectedRoom = roomData.find(room => room.roomType === roomType);
+  const roomNumber = parseInt(roomCard.dataset.roomNumber); // Assuming you set a "data-room-number" attribute in your HTML
+  const selectedRoom = roomData.find(room => room.number === roomNumber);
 
   if (selectedRoom) {
     // Display booking details for the selected room
