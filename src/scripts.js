@@ -285,6 +285,7 @@ function displayBookings(bookings, roomData) {
   cardContainer.innerHTML = '';
 
   // Loop through the bookings and create card elements
+  console.log(bookings);
   bookings.forEach(booking => {
     // Find the room details for this booking
     const roomDetails = bookingsByRoomByGuest(
@@ -371,21 +372,6 @@ function displaySearchResults() {
   }
 }
 
-// roomContainer.addEventListener('click', event => {
-//   if (event.target.classList.contains('bookBtn')) {
-//     const roomCard = event.target.closest('.card-wrapper');
-//     const roomType = roomCard.querySelector('.room-type').textContent;
-//     // You can use the roomType or any other information you need to book the room.
-
-//     // Find the selected room based on roomType (modify this logic if needed)
-//     const selectedRoom = roomData.find(room => room.roomType === roomType);
-
-//     if (selectedRoom) {
-//       displaySelectedBooking(selectedRoom);
-//     }
-//   }
-// });
-
 roomContainer.addEventListener('click', event => {
   if (event.target.classList.contains('bookBtn')) {
     // Handle room booking
@@ -449,27 +435,24 @@ const displaySelectedBooking = selectedRoom => {
 };
 
 const handleReservation = (selectedRoom, searchDate) => {
-  console.log('reserve button clicked');
-  // Gather the data for the POST
   const bookingData = {
-    userID: currentGuest.id, // Use the guest's ID or user ID
-    date: searchDate, // Replace with the selected date
-    roomNumber: selectedRoom.number, // Use the room number of the selected room
+    userID: currentGuest.id,
+    date: searchDate,
+    roomNumber: selectedRoom.number,
   };
 
-  const reserveButton = selectedRoomContainer.querySelector('.reserve');
-  reserveButton.classList.add('hidden');
+  sendBookingToServer(bookingData)
+    .then(() => {
+      return fetchBookings();
+    })
+    .then(data => {
+      //Update the global bookingsData variable
+      bookingsData = data.bookings;
+      console.log(bookingsData);
 
-  // Unhide the reservation message
-  const reservationMessage = selectedRoomContainer.querySelector(
-    '.reservation-message'
-  );
-  reservationMessage.classList.remove('hidden');
-
-  // Send the booking data to the server and update the UI with the refreshed bookings data
-  sendBookingToServer(bookingData, updatedBookingsData => {
-    // Assuming that updatedBookingsData is the refreshed bookings data
-    // You can update the UI with the updated bookings data here
-    displayBookings(updatedBookingsData);
-  });
+      displayBookings(bookingsData, roomData);
+    })
+    .catch(error => {
+      console.error('Error in handleReservation:', error);
+    });
 };
