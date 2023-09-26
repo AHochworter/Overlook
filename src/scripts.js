@@ -77,10 +77,10 @@ const fetchAllData = () => {
       bookingsData = data[1].bookings;
       roomData = data[2].rooms;
 
-      // You can also log the data after assignment
-      console.log('Assigned Customer Data:', customerData);
-      console.log('Assigned Bookings Data:', bookingsData);
-      console.log('Assigned Room Data:', roomData);
+      // // You can also log the data after assignment
+      // console.log('Assigned Customer Data:', customerData);
+      // console.log('Assigned Bookings Data:', bookingsData);
+      // console.log('Assigned Room Data:', roomData);
     })
     .catch(error => {
       console.error('Error fetching data:', error);
@@ -436,5 +436,10 @@ const handleReservation = (selectedRoom, searchDate) => {
   );
   reservationMessage.classList.remove('hidden');
 
-  sendBookingToServer(bookingData);
+  // Send the booking data to the server and update the UI with the refreshed bookings data
+  sendBookingToServer(bookingData, updatedBookingsData => {
+    // Assuming that updatedBookingsData is the refreshed bookings data
+    // You can update the UI with the updated bookings data here
+    displayBookings(updatedBookingsData);
+  });
 };
