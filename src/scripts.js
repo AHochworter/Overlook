@@ -429,7 +429,7 @@ const displaySelectedBooking = selectedRoom => {
 
   const reserveButton = selectedRoomContainer.querySelector('.reserve.bookBtn');
   reserveButton.addEventListener('click', () => {
-    // Step 10: Handle reservation
+    console.log('reserve button clicked');
     handleReservation(selectedRoom, searchDate);
   });
 };
