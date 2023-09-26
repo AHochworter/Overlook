@@ -41,6 +41,7 @@ const totalSpent = document.getElementById('totalSpent');
 const cardContainer = document.getElementById('cardContainer');
 const roomContainer = document.querySelector('.room-container');
 const selectedRoomContainer = document.querySelector('.selected-room');
+const openingImage = document.querySelector('.opening-img');
 
 //BUTTONS
 const loginBtn = document.querySelector('.login-btn');
@@ -127,6 +128,7 @@ loginBtn.addEventListener('click', event => {
     console.log(currentGuest);
     removeHiddenClass([
       dashboardView,
+      openingImage,
       cardContainer,
       bookRoomBtn,
       logoutBtn,
@@ -184,6 +186,8 @@ upcomingBookingsBtn.addEventListener('click', () => {
   // Log the upcoming bookings
   console.log('Upcoming Bookings:', upcomingBookings);
 
+  addHiddenClass([openingImage]);
+
   displayBookings(upcomingBookings, roomData);
 });
 
@@ -193,6 +197,7 @@ pastBookingsBtn.addEventListener('click', () => {
 
   // Log the past bookings
   console.log('Past Bookings:', pastBookings);
+  addHiddenClass([openingImage]);
 
   displayBookings(pastBookings, roomData);
 });
