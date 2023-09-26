@@ -18,13 +18,4 @@ describe('login and password', function () {
     expect(guestCredentials.name).to.equal('Amelia Thompson');
     expect(guestCredentials.id).to.equal(1);
   });
-
-  it('verifyLogin should be a function', () => {
-    expect(verifyLogin).to.be.a('function');
-  });
-
-  it('should check and verify the login credientials', () => {
-    const guestCredentials = findGuest('customer1', 'overlook21', customerData);
-    expect(guestCredentials).to.deep.equal({ id: 1, name: 'Amelia Thompson' });
-  });
 });

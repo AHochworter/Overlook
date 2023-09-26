@@ -43,10 +43,10 @@
           <h2 class="login-message" id="loginMessage">Welcome to the Overlook</h2>
           <h2 class="login-message" id="loginPlease">Please Log In</h2>          
           <form class="login-form" id="loginForm">
-            <label for="username" class="username">Username</label><br />
-            <input type="text" id="username" value="" /><br />
-            <label for="password" class="password">Password</label><br />
-            <input type="password" id="password" value="" /><br />
+            <label for="username" class="username">Username</label>
+            <input type="text" class="user-input" id="username" value="" />
+            <label for="password" class="password">Password</label>
+            <input type="password" class="password-input" id="password" value="" />
             <button type="button" class="login-btn">Login</button>
             <div class="error-message" id="errorMessage" ></div>
           </form>
@@ -70,13 +70,14 @@
               <input class="date-input" aria-label="select-a-date" type="date" id="dateOfStay" name="date-of-stay" required/>
               <button type="submit" class="select-date-btn">Search</button>
             </form>
-          </fieldset>          
-          <button class="single-room" id="singleRoom">Single</button>
-          <button class="junior-suite" id="juniorSuite">Junior Suite</button>
-          <button class="residential" id="residential">Residential</button>
-          <button class="suite" id="suite">Suite</button>
-          <button class="all-room-types" id="allRoomTypes">All</button>
-        </nav>
+          </fieldset>                       
+            <button class="single-room" id="singleRoom">Single</button>
+            <button class="junior-suite" id="juniorSuite">Junior Suite</button>
+            <button class="residential" id="residential">Residential</button>
+            <button class="suite" id="suite">Suite</button>
+            <button class="all-room-types" id="allRoomTypes">All</button>               
+          </nav>
+          <h2 class="rooms-available hidden" id="roomsAvail">Rooms Available</h2>
         <div class="room-container" id="bookARoomOneContainer">
           <!-- Room cards go here! -->
         </div>
