@@ -318,16 +318,14 @@ function displayBookings(bookings, roomData) {
         </div>
         <div class="card room-details-wrapper">
         <h3 class="room-type">${roomDetails.room.roomType.toUpperCase()}</h3>
+        <h3 class="date-booked">Date: ${booking.date}</h3>
         <h4 class="room-details room-number">Room Number: ${
           roomDetails.room.number
         }</h4>
-        <h4 class="room-details bedsize">Bedsize: ${
-          roomDetails.room.bedSize
-        }</h4>
-        <h4 class="room-details num-beds">Number of Beds: ${
-          roomDetails.room.numBeds
-        }</h4>
-        <h4 class="room-details room-cost">Cost Per Night: ${
+        <h4 class="room-details">${roomDetails.room.numBeds} ${
+        roomDetails.room.bedSize
+      } bed(s)</h4>
+        <h4 class="room-details room-cost">Cost Per Night: $${
           roomDetails.room.costPerNight
         }</h4>
       </div>
@@ -431,7 +429,8 @@ const displaySelectedBooking = selectedRoom => {
       </div>
       <div class="single-card-main-wrapper">
         <div class="single-card-text-wrapper">
-          <h3 class="card-booking-text">We Look Forward to Your Visit.  You're Reserving:</h3>
+          <h3 class="card-booking-text">We Look Forward to Your Visit!</h3>
+          <h3 class="date-booked">You are booking on: ${searchDate}</h3>
           <p class="card-booking-text roomType">${selectedRoom.roomType[0].toUpperCase()}${selectedRoom.roomType.substring(
     1
   )} with ${selectedRoom.numBeds} ${selectedRoom.bedSize} sized beds</p>
