@@ -41,6 +41,8 @@ const totalSpent = document.getElementById('totalSpent');
 const cardContainer = document.getElementById('cardContainer');
 const roomContainer = document.querySelector('.room-container');
 const selectedRoomContainer = document.querySelector('.selected-room');
+const openingImage = document.querySelector('.opening-img');
+const selectDataForm = document.querySelector('.book-a-room-form');
 
 //BUTTONS
 const loginBtn = document.querySelector('.login-btn');
@@ -127,6 +129,7 @@ loginBtn.addEventListener('click', event => {
     console.log(currentGuest);
     removeHiddenClass([
       dashboardView,
+      openingImage,
       cardContainer,
       bookRoomBtn,
       logoutBtn,
@@ -181,10 +184,17 @@ upcomingBookingsBtn.addEventListener('click', () => {
     bookingsData,
     roomData
   );
-  // Log the upcoming bookings
-  console.log('Upcoming Bookings:', upcomingBookings);
+  addHiddenClass([openingImage]);
 
-  displayBookings(upcomingBookings, roomData);
+  if (upcomingBookings.length === 0) {
+    const message = 'You have no upcoming bookings.';
+
+    cardContainer.innerHTML += `<div class="display-message">
+    <h3>You Have Not Booked Any Upcoming Visits Yet.</h3>
+    </div>`;
+  } else {
+    displayBookings(upcomingBookings, roomData);
+  }
 });
 
 pastBookingsBtn.addEventListener('click', () => {
@@ -193,6 +203,7 @@ pastBookingsBtn.addEventListener('click', () => {
 
   // Log the past bookings
   console.log('Past Bookings:', pastBookings);
+  addHiddenClass([openingImage]);
 
   displayBookings(pastBookings, roomData);
 });
@@ -307,16 +318,14 @@ function displayBookings(bookings, roomData) {
         </div>
         <div class="card room-details-wrapper">
         <h3 class="room-type">${roomDetails.room.roomType.toUpperCase()}</h3>
+        <h3 class="date-booked">Date: ${booking.date}</h3>
         <h4 class="room-details room-number">Room Number: ${
           roomDetails.room.number
         }</h4>
-        <h4 class="room-details bedsize">Bedsize: ${
-          roomDetails.room.bedSize
-        }</h4>
-        <h4 class="room-details num-beds">Number of Beds: ${
-          roomDetails.room.numBeds
-        }</h4>
-        <h4 class="room-details room-cost">Cost Per Night: ${
+        <h4 class="room-details">${roomDetails.room.numBeds} ${
+        roomDetails.room.bedSize
+      } bed(s)</h4>
+        <h4 class="room-details room-cost">Cost Per Night: $${
           roomDetails.room.costPerNight
         }</h4>
       </div>
@@ -325,11 +334,23 @@ function displayBookings(bookings, roomData) {
   });
 }
 
-selectDateBtn.addEventListener('click', displaySearchResults);
+selectDataForm.addEventListener('submit', event => {
+  event.preventDefault();
+  displaySearchResults();
+});
 
-//
 function displaySearchResults() {
   const searchDateValue = document.getElementById('dateOfStay').value;
+
+  // Check if a date has been selected
+  if (!searchDateValue) {
+    roomContainer.innerHTML = `
+      <div class="no-date-selected-message">
+        <p class="no-dates-match">Please Select A Date</p>
+      </div>`;
+    return; // Exit the function early
+  }
+
   searchDate = searchDateValue.replaceAll('-', '/');
 
   // Filter rooms by availability and selected room type if one is selected
@@ -358,7 +379,7 @@ function displaySearchResults() {
 
     filteredRooms.forEach(room => {
       roomContainer.innerHTML += `
-        <div class="card-wrapper"> 
+        <div class="card-wrapper" data-room-number="${room.number}"> 
           <div class="img-wrapper">
             <img class="room-img" src="./images/${room.roomType}.jpg" alt="${room.roomType}" />
           </div>
@@ -383,8 +404,8 @@ roomContainer.addEventListener('click', event => {
 
 const handleRoomBooking = event => {
   const roomCard = event.target.closest('.card-wrapper');
-  const roomType = roomCard.querySelector('.room-type').textContent;
-  const selectedRoom = roomData.find(room => room.roomType === roomType);
+  const roomNumber = parseInt(roomCard.dataset.roomNumber); // Assuming you set a "data-room-number" attribute in your HTML
+  const selectedRoom = roomData.find(room => room.number === roomNumber);
 
   if (selectedRoom) {
     // Display booking details for the selected room
@@ -408,7 +429,8 @@ const displaySelectedBooking = selectedRoom => {
       </div>
       <div class="single-card-main-wrapper">
         <div class="single-card-text-wrapper">
-          <h3 class="card-booking-text">We Look Forward to Your Visit.  You're Reserving:</h3>
+          <h3 class="card-booking-text">We Look Forward to Your Visit!</h3>
+          <h3 class="date-booked">You are booking on: ${searchDate}</h3>
           <p class="card-booking-text roomType">${selectedRoom.roomType[0].toUpperCase()}${selectedRoom.roomType.substring(
     1
   )} with ${selectedRoom.numBeds} ${selectedRoom.bedSize} sized beds</p>
