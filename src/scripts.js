@@ -440,6 +440,14 @@ const handleReservation = (selectedRoom, searchDate) => {
     date: searchDate,
     roomNumber: selectedRoom.number,
   };
+  const reserveButton = selectedRoomContainer.querySelector('.reserve');
+  reserveButton.classList.add('hidden');
+
+  // Unhide the reservation message
+  const reservationMessage = selectedRoomContainer.querySelector(
+    '.reservation-message'
+  );
+  reservationMessage.classList.remove('hidden');
 
   sendBookingToServer(bookingData)
     .then(() => {
