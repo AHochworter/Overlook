@@ -179,7 +179,6 @@ const verifyLogin = (username, password, customerData) => {
 };
 
 upcomingBookingsBtn.addEventListener('click', () => {
-  console.log('Upcoming was clicked');
   const upcomingBookings = guestComingBookings(
     currentGuest,
     bookingsData,
@@ -198,7 +197,6 @@ upcomingBookingsBtn.addEventListener('click', () => {
 });
 
 pastBookingsBtn.addEventListener('click', () => {
-  console.log('Past Stays was clicked');
   const pastBookings = guestPastBookings(currentGuest, bookingsData, roomData);
 
   // Log the past bookings
@@ -255,8 +253,9 @@ allRoomTypes.addEventListener('click', () => {
 });
 
 dashboardBtn.addEventListener('click', () => {
-  console.log('Dashboard Button Clicked');
+  cardContainer.innerHTML = `<img class="opening-img "src="./images/village-on-lake.jpg"/>`;
   removeHiddenClass([
+    openingImage,
     dashboardView,
     cardContainer,
     bookRoomBtn,
@@ -267,6 +266,7 @@ dashboardBtn.addEventListener('click', () => {
     loginView,
     bookRoomOne,
     bookRoomTwo,
+    roomContainer,
     selectedRoomContainer,
     dashboardBtn,
   ]);

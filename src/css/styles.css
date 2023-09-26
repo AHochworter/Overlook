@@ -214,6 +214,9 @@ main {
   font-size: 18px;
   /* flex-shrink: 0; */
 }
+/* .dashboard-btn:active {
+  background-color: #948a8b;
+} */
 
 /* BUTTONS */
 .single-room,
