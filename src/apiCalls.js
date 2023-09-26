@@ -52,42 +52,25 @@ export const fetchRooms = () => {
     });
 };
 
-export const sendBookingToServer = (booking, callBack) => {
-  // Define the URL where you want to send the POST request
+export const sendBookingToServer = booking => {
   const url = 'http://localhost:3001/api/v1/bookings';
 
-  // Create a fetch POST request with the booking data
-  fetch(url, {
+  return fetch(url, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify(booking), // Convert the booking object to JSON
+    body: JSON.stringify(booking),
   })
     .then(response => {
-      if (response.ok) {
-        console.log('Booking successful');
-
-        // After a successful POST, refresh the bookings data with a GET request
-        return fetch('http://localhost:3001/api/v1/bookings');
-      } else {
-        console.error('Booking failed');
+      console.log(response);
+      if (!response.ok) {
         throw new Error('Booking failed');
       }
-    })
-    .then(response => response.json())
-    .then(data => {
-      // Ensure data is an array - ChatGPT suggestion
-      const bookingsData = Array.isArray(data) ? data : [data];
-
-      // Handle the refreshed bookings data here
-      console.log('Refreshed Bookings Data:', bookingsData);
-
-      // This is also a ChatGPT suggestion
-      callBack(bookingsData);
+      return response.json();
     })
     .catch(error => {
       console.error('Error sending booking:', error);
-      // Handle errors (e.g., display an error message)
+      throw error;
     });
 };
