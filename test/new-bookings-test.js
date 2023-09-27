@@ -15,9 +15,8 @@ describe('determine availability', function () {
   });
 
   it('should give a list of all the upcoming bookings', () => {
-    // Generate a dynamic current date by adding some days to the current date.
     const currentDate = new Date();
-    currentDate.setDate(currentDate.getDate() + 1); // Add 1 day to the current date.
+    currentDate.setDate(currentDate.getDate() + 1);
 
     const upcomingBookings = allUpcomingBookings(bookingsData, currentDate);
 
