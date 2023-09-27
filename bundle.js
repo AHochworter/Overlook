@@ -13,7 +13,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "sendBookingToServer": () => (/* binding */ sendBookingToServer)
 /* harmony export */ });
 const fetchCustomers = () => {
-  return fetch('http://localhost:3001/api/v1/customers')
+  return fetch('https://overlook-backend.vercel.app/api/v1/customers')
     .then(response => {
       if (!response.ok) {
         throw new Error('Network response was not ok');
@@ -30,7 +30,7 @@ const fetchCustomers = () => {
 };
 
 const fetchBookings = () => {
-  return fetch('http://localhost:3001/api/v1/bookings')
+  return fetch('https://overlook-backend.vercel.app/api/v1/bookings')
     .then(response => {
       if (!response.ok) {
         throw new Error('Network response was not ok');
@@ -47,7 +47,7 @@ const fetchBookings = () => {
 };
 
 const fetchRooms = () => {
-  return fetch('http://localhost:3001/api/v1/rooms')
+  return fetch('https://overlook-backend.vercel.app/api/v1/rooms')
     .then(response => {
       if (!response.ok) {
         throw new Error('Network response was not ok');
@@ -64,7 +64,7 @@ const fetchRooms = () => {
 };
 
 const sendBookingToServer = booking => {
-  const url = 'http://localhost:3001/api/v1/bookings';
+  const url = 'https://overlook-backend.vercel.app/api/v1/bookings';
 
   return fetch(url, {
     method: 'POST',
