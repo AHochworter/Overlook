@@ -22,6 +22,7 @@ import './css/styles.css';
 // An example of how you tell webpack to use an image (also need to link to it in the index.html)
 import './images/overlook-logo.jpg';
 import './images/village-on-lake.jpg';
+import './images/welcome-to-overlook.jpg';
 import './images/single room.jpg';
 import './images/junior suite.jpg';
 import './images/residential suite.jpg';
@@ -179,7 +180,6 @@ const verifyLogin = (username, password, customerData) => {
 };
 
 upcomingBookingsBtn.addEventListener('click', () => {
-  console.log('Upcoming was clicked');
   const upcomingBookings = guestComingBookings(
     currentGuest,
     bookingsData,
@@ -198,7 +198,6 @@ upcomingBookingsBtn.addEventListener('click', () => {
 });
 
 pastBookingsBtn.addEventListener('click', () => {
-  console.log('Past Stays was clicked');
   const pastBookings = guestPastBookings(currentGuest, bookingsData, roomData);
 
   // Log the past bookings
@@ -255,8 +254,9 @@ allRoomTypes.addEventListener('click', () => {
 });
 
 dashboardBtn.addEventListener('click', () => {
-  console.log('Dashboard Button Clicked');
+  cardContainer.innerHTML = `<img class="opening-img "src="./images/welcome-to-overlook.jpg"/>`;
   removeHiddenClass([
+    openingImage,
     dashboardView,
     cardContainer,
     bookRoomBtn,
@@ -267,6 +267,7 @@ dashboardBtn.addEventListener('click', () => {
     loginView,
     bookRoomOne,
     bookRoomTwo,
+    roomContainer,
     selectedRoomContainer,
     dashboardBtn,
   ]);
