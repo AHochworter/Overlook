@@ -15,7 +15,7 @@ Welcome to 'The Overlook at Chimney Hollow,' a picturesque hotel nestled on the 
 
 - [Nicole Lam](https://github.com/Nicolelam8891)
 
-## Installation Instructions
+### Installation Instructions
 
 1. Copy SSH key.
 2. Open up the terminal.
@@ -36,15 +36,15 @@ Welcome to 'The Overlook at Chimney Hollow,' a picturesque hotel nestled on the 
 - Implement a robust testing suite using TDD
 - Write DRY, reusable code that follows SRP (Single Responsibility Principle)
 
-## Tech Used:
+### Tech Used:
 
 - Github, Terminal, VS Code, Dev Tools, Javascript, Figma, CSS, and HTML, Network Requests
 
-## Resources Used:
+### Resources Used:
 
 - MDN Documents, Google, Stack Overflow.
 
-## Wins + Challenges
+### Wins + Challenges
 
 ### Wins:
 
