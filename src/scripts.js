@@ -22,6 +22,7 @@ import './css/styles.css';
 // An example of how you tell webpack to use an image (also need to link to it in the index.html)
 import './images/overlook-logo.jpg';
 import './images/village-on-lake.jpg';
+import './images/welcome-to-overlook.jpg';
 import './images/single room.jpg';
 import './images/junior suite.jpg';
 import './images/residential suite.jpg';
@@ -253,7 +254,7 @@ allRoomTypes.addEventListener('click', () => {
 });
 
 dashboardBtn.addEventListener('click', () => {
-  cardContainer.innerHTML = `<img class="opening-img "src="./images/village-on-lake.jpg"/>`;
+  cardContainer.innerHTML = `<img class="opening-img "src="./images/welcome-to-overlook.jpg"/>`;
   removeHiddenClass([
     openingImage,
     dashboardView,

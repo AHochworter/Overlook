@@ -2,7 +2,11 @@ import chai from 'chai';
 const expect = chai.expect;
 
 import roomData from '../sample-data/sample-rooms';
-import { allUpcomingBookings, allAvailableRooms } from '../src/new-bookings';
+import {
+  allUpcomingBookings,
+  allAvailableRooms,
+  findSelectedRoom,
+} from '../src/new-bookings';
 import bookingsData from '../sample-data/sample-bookings';
 
 describe('determine availability', function () {
@@ -86,7 +90,7 @@ describe('determine availability', function () {
   });
 
   it('should return an array of available rooms based on current date', () => {
-    let currentDate = new Date('12/14/2023');
+    let currentDate = '12/14/2023';
     const checkAvailability = allAvailableRooms(
       roomData,
       bookingsData,
