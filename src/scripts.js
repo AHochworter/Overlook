@@ -1,4 +1,3 @@
-// This is the JavaScript entry file - your code begins here
 // Do not delete or rename this file ********
 import {
   fetchCustomers,
@@ -27,8 +26,6 @@ import './images/single room.jpg';
 import './images/junior suite.jpg';
 import './images/residential suite.jpg';
 import './images/suite.jpg';
-import './images/room1.jpg';
-import './images/room2.jpg';
 
 //Query Selectors 👇
 const loginView = document.querySelector('.login-view');
@@ -75,11 +72,6 @@ let searchDate;
 const fetchAllData = () => {
   return Promise.all([fetchCustomers(), fetchBookings(), fetchRooms()])
     .then(data => {
-      // Log the data received from API calls
-      console.log('Customer Data:', data[0]);
-      console.log('Bookings Data:', data[1]);
-      console.log('Room Data:', data[2]);
-
       // Assign data to global variables
       customerData = data[0].customers;
       bookingsData = data[1].bookings;
@@ -106,18 +98,15 @@ const addHiddenClass = elements => {
 
 loginBtn.addEventListener('click', event => {
   event.preventDefault();
-  console.log('login button clicked');
   const enteredUsername = username.value;
   const enteredPassword = password.value;
 
-  // Check if the password field is empty
   if (!enteredPassword) {
     const errorMessageElement = document.getElementById('errorMessage');
     errorMessageElement.textContent = 'Please enter a password.';
     return;
   }
 
-  // Check the login result
   const loginResult = verifyLogin(
     enteredUsername,
     enteredPassword,
@@ -143,17 +132,13 @@ loginBtn.addEventListener('click', event => {
       selectedRoomContainer,
     ]);
 
-    // Calculate the total spent and update the totalSpent element
     const guestTotal = guestTotalSpent(currentGuest, bookingsData, roomData);
     totalSpent.textContent = `Your total Spent for PAST Stays is $${guestTotal.toFixed(
       2
     )}`;
 
-    // Update the welcome message
     welcomeUser.textContent = `Welcome Back ${currentGuest.name}!`;
   } else {
-    // Login failed, display an error message to the user
-    console.log('Login failed');
     const errorMessageElement = document.getElementById('errorMessage');
     errorMessageElement.textContent = loginResult;
   }
@@ -185,11 +170,9 @@ upcomingBookingsBtn.addEventListener('click', () => {
     bookingsData,
     roomData
   );
-  console.log(upcomingBookings);
   addHiddenClass([openingImage]);
 
   if (upcomingBookings.length === 0) {
-    // const message = 'You have no upcoming bookings.';
     cardContainer.innerHTML += `<div class="display-message">
     <h3>You Have Not Booked Any Upcoming Visits Yet.</h3>
     </div>`;
@@ -200,11 +183,7 @@ upcomingBookingsBtn.addEventListener('click', () => {
 
 pastBookingsBtn.addEventListener('click', () => {
   const pastBookings = guestPastBookings(currentGuest, bookingsData, roomData);
-
-  // Log the past bookings
-  console.log('Past Bookings:', pastBookings);
   addHiddenClass([openingImage]);
-
   displayBookings(pastBookings, roomData);
 });
 
@@ -213,7 +192,6 @@ logoutBtn.addEventListener('click', () => {
 });
 
 bookRoomBtn.addEventListener('click', () => {
-  console.log('Book Room Clicked');
   document.getElementById('dateOfStay').value = '';
   roomContainer.innerHTML = '';
   selectedRoomType = null;
@@ -275,9 +253,8 @@ dashboardBtn.addEventListener('click', () => {
   ]);
 });
 
-// Call fetchAllData and loadUpcomingBookings when the page loads
+// Call fetchAllData when the page loads
 window.addEventListener('load', () => {
-  // Fetch all data before displaying bookings
   fetchAllData()
     .then(() => {
       if (currentGuest) {
@@ -298,7 +275,6 @@ function displayBookings(bookings, roomData) {
       roomData
     ).filter(item => item.date === booking.date);
 
-    console.log('roomDetails', roomDetails);
     if (roomDetails) {
       roomDetails.forEach(booking => {
         cardContainer.innerHTML += `
@@ -341,24 +317,20 @@ selectDataForm.addEventListener('submit', event => {
 function displaySearchResults() {
   const searchDateValue = document.getElementById('dateOfStay').value;
 
-  // Check if a date has been selected
   if (!searchDateValue) {
     roomContainer.innerHTML = `
       <div class="no-date-selected-message">
         <p class="no-dates-match">Please Select A Date</p>
       </div>`;
-    return; // Exit the function early
+    return;
   }
 
   searchDate = searchDateValue.replaceAll('-', '/');
 
-  // Filter rooms by availability and selected room type if one is selected
   let filteredRooms = allAvailableRooms(roomData, bookingsData, searchDate);
 
   removeHiddenClass([roomsAvailMessage]);
   roomsAvailMessage.textContent = `There are ${filteredRooms.length} rooms available!`;
-
-  console.log('filtered-available rooms', filteredRooms);
 
   if (selectedRoomType !== null) {
     filteredRooms = filteredRooms.filter(
@@ -367,7 +339,6 @@ function displaySearchResults() {
   }
 
   if (filteredRooms.length === 0) {
-    // Handle case where no rooms match the criteria
     roomContainer.innerHTML = `
       <div class="no-rooms-available-message">
         <p class="no-rooms-match">No Rooms Available</p>
@@ -375,11 +346,10 @@ function displaySearchResults() {
     cardContainer.classList.add('hidden');
     roomContainer.classList.remove('hidden');
   } else {
-    // Display the filtered rooms
     cardContainer.classList.add('hidden');
     roomContainer.classList.remove('hidden');
 
-    roomContainer.innerHTML = ''; // Clear existing content
+    roomContainer.innerHTML = '';
 
     filteredRooms.forEach(room => {
       roomContainer.innerHTML += `
@@ -403,7 +373,6 @@ function displaySearchResults() {
 
 roomContainer.addEventListener('click', event => {
   if (event.target.classList.contains('bookBtn')) {
-    // Handle room booking
     handleRoomBooking(event);
   }
 });
@@ -412,10 +381,7 @@ const handleRoomBooking = event => {
   const roomCard = event.target.closest('.card-wrapper');
   const roomNumber = parseInt(roomCard.dataset.roomNumber); // Assuming you set a "data-room-number" attribute in your HTML
   const selectedRoom = roomData.find(room => room.number === roomNumber);
-  console.log('handleRoomBooking', selectedRoom);
-
   if (selectedRoom) {
-    // Display booking details for the selected room
     displaySelectedBooking(selectedRoom);
   }
 };
@@ -423,10 +389,9 @@ const handleRoomBooking = event => {
 const displaySelectedBooking = selectedRoom => {
   addHiddenClass([bookRoomOne]);
   removeHiddenClass([bookRoomTwo, selectedRoomContainer]);
-
   // Clear the content of selectedRoomContainer
   selectedRoomContainer.innerHTML = '';
-
+  //fill the content of selectedRoomContainer
   selectedRoomContainer.innerHTML = `
     <article class="selected-room">
       <div class="single-img-wrapper">
@@ -464,14 +429,11 @@ const displaySelectedBooking = selectedRoom => {
 
   const reserveButton = selectedRoomContainer.querySelector('.reserve.bookBtn');
   reserveButton.addEventListener('click', () => {
-    console.log('reserve button clicked');
-    console.log('selectedRoom just before POST', selectedRoom);
     handleReservation(selectedRoom, searchDate);
   });
 };
 
 const handleReservation = (selectedRoom, searchDate) => {
-  console.log('handleReservation', selectedRoom);
   const bookingData = {
     userID: currentGuest.id,
     date: searchDate,
@@ -480,7 +442,6 @@ const handleReservation = (selectedRoom, searchDate) => {
   const reserveButton = selectedRoomContainer.querySelector('.reserve');
   reserveButton.classList.add('hidden');
 
-  // Unhide the reservation message
   const reservationMessage = selectedRoomContainer.querySelector(
     '.reservation-message'
   );
@@ -491,12 +452,7 @@ const handleReservation = (selectedRoom, searchDate) => {
       return fetchBookings();
     })
     .then(data => {
-      //Update the global bookingsData variable
       bookingsData = data.bookings;
-      console.log('bookingsData after New FETCH', bookingsData);
-      console.log('data.bookings', data.bookings);
-
-      // displayBookings(bookingsData, roomData);
     })
     .catch(error => {
       console.error('Error in handleReservation:', error);
