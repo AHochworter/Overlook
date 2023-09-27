@@ -17,16 +17,10 @@ Welcome to 'The Overlook at Chimney Hollow,' a picturesque hotel nestled on the 
 
 ### Installation Instructions
 
-1. Copy SSH key.
-2. Open up the terminal.
-3. Change into the directory you wish to clone the app into with the cd command.
-4. Use the git clone git@github.com:AHochworter/Overlook.git command followed by pasting the copied SSH key.
-5. Change into the cloned directory with the cd command followed by the name of the directory.
-6. Run npm install and wait a few seconds until its finish installing
-7. Run npm start
-8. Change into the directory where you cloned the Overlook front end app
-9. Use git clone to clone the overlook backend api into this directory.  
-   https://github.com/turingschool-examples/overlook-api
+1. [Deployed Link](https://ahochworter.github.io/Overlook/)
+2. For the user name enter `customer15` using any number between 1 and 50.
+3. Enter the password `overlook2021`
+
 
 ### Learning Goals
 
