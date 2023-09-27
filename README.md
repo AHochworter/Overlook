@@ -6,6 +6,8 @@ Welcome to 'The Overlook at Chimney Hollow,' a picturesque hotel nestled on the 
 
 ## Preview of the App
 
+![Overlook](https://user-images.githubusercontent.com/130494366/268521958-36a8d72c-c7df-400c-980d-93a18dd704c9.gif)
+
 ## Contributors
 
 - [Ann Hochworter](https://github.com/AHochworter)
