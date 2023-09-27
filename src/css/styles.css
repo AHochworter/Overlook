@@ -42,6 +42,19 @@ main {
   color: #ffffff;
 }
 
+.logo-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 165px;
+}
+
+.opening-message-wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 175px;
+}
+
 .master-buttons-wrapper {
   display: flex;
   flex-direction: row;
@@ -49,7 +62,6 @@ main {
 }
 
 /* LOGIN VIEW */
-
 .login-view {
   display: flex;
   justify-content: center;
@@ -61,19 +73,6 @@ main {
   background-position: center;
   height: 75vh;
   width: 100vw;
-}
-
-.opening-img {
-  width: 1395px;
-  height: 700px;
-  background: lightgray 50% / cover no-repeat;
-}
-
-.logo-wrapper {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 165px;
 }
 
 .username,
@@ -92,12 +91,6 @@ main {
   width: 200px;
   padding: 6px;
   margin-bottom: 15px;
-}
-
-.opening-message-wrapper {
-  display: flex;
-  flex-direction: column;
-  height: 175px;
 }
 
 .login-wrapper {
@@ -127,6 +120,13 @@ main {
   box-shadow: 0px 4px 4px 5px rgba(0, 0, 0, 0.3);
 }
 
+/* DASHBOARD VIEW */
+.opening-img {
+  width: 1395px;
+  height: 700px;
+  background: lightgray 50% / cover no-repeat;
+}
+
 .welcome-user {
   display: flex;
   justify-content: flex-start;
@@ -143,7 +143,6 @@ main {
   line-height: normal;
 }
 
-/* DASHBOARD VIEW */
 .total-spent {
   display: flex;
   justify-content: flex-start;
@@ -160,7 +159,7 @@ main {
   line-height: normal;
 }
 
-/* BUTTONS */
+/* BUTTONS TOP LEVEL */
 .login-btn,
 .master-nav {
   color: #ffffff;
@@ -186,6 +185,16 @@ main {
   box-shadow: 0px 4px 4px 5px rgba(0, 0, 0, 0.5);
 }
 
+.card-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  overflow-y: auto;
+  width: 1250px;
+  height: 700px;
+  flex-shrink: 0;
+}
+
 .book-a-room-step-two {
   display: flex;
   justify-content: center;
@@ -199,6 +208,7 @@ main {
   box-shadow: 0px 4px 4px 5px rgba(0, 0, 0, 0.5);
 }
 
+/* NAVIGATION AREA AT TOP OF EACH VIEW */
 .dashboard-view-nav,
 .book-a-room-one {
   display: flex;
@@ -209,7 +219,7 @@ main {
   height: 75px;
 }
 
-/* BUTTONS */
+/* BUTTONS DASHBOARD*/
 .upcoming-bookings-btn,
 .past-bookings-btn {
   display: flex;
@@ -224,7 +234,6 @@ main {
   color: #000;
   font-family: 'Roboto', sans-serif;
   font-size: 18px;
-  /* flex-shrink: 0; */
 }
 
 .upcoming-bookings-btn:focus {
@@ -235,7 +244,7 @@ main {
   background-color: aqua;
 }
 
-/* BUTTONS */
+/* BUTTONS BOOK-A-ROOM */
 .single-room,
 .junior-suite,
 .residential,
@@ -274,17 +283,6 @@ main {
 
 .residential:focus {
   background-color: aqua;
-}
-
-.card-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-evenly;
-  /* background-color: aquamarine; */
-  overflow-y: auto;
-  width: 1250px;
-  height: 700px;
-  flex-shrink: 0;
 }
 
 .room-details {
@@ -424,9 +422,9 @@ legend {
   display: flex;
   width: 266px;
   max-height: 178px;
-  /* width: auto;
-  height: auto; */
 }
+
+/* BUTTONS-RESERVATION */
 .bookBtn,
 .select-date-btn {
   width: 110px;
