@@ -1,11 +1,11 @@
 {
-  "name": "webpack-starter-kit",
+  "name": "Overlook",
   "version": "2.0.0",
-  "description": "Project starter kit using webpack, mocha, chai, and SCSS/SASS enabled",
+  "description": "Overlook Solo Project-Mod2",
   "main": "src/index.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/turingschool-examples/webpack-starter-kit.git"
+    "url": "git+https://github.com/AHochworter/Overlook.git"
   },
   "author": "Turing School of Software and Design",
   "license": "MIT",
@@ -14,6 +14,7 @@
     "css-loader": "^5.2.6",
     "eslint": "^7.27.0",
     "file-loader": "^6.2.0",
+    "gh-pages": "^6.0.0",
     "mocha": "^8.4.0",
     "mochapack": "^2.1.2",
     "sass": "^1.34.0",
@@ -24,10 +25,11 @@
     "webpack-dev-server": "^3.11.2"
   },
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist",
     "start": "webpack serve",
     "build": "webpack",
     "test": "mochapack 'test/**/*.js'",
     "lint": "./node_modules/.bin/eslint 'src/**.js' 'test/**.js'"
-  },
-  "dependencies": {}
+  }
 }
