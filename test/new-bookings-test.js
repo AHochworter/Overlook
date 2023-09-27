@@ -90,7 +90,7 @@ describe('determine availability', function () {
   });
 
   it('should return an array of available rooms based on current date', () => {
-    let currentDate = '12/14/2023';
+    let currentDate = '11/23/23';
     const checkAvailability = allAvailableRooms(
       roomData,
       bookingsData,
@@ -187,12 +187,28 @@ describe('determine availability', function () {
         costPerNight: 1155.43,
       },
       {
+        number: 12,
+        roomType: 'single room',
+        bidet: 'false',
+        bedSize: 'twin',
+        numBeds: 2,
+        costPerNight: 1129.07,
+      },
+      {
         number: 13,
         roomType: 'single room',
         bidet: 'false',
         bedSize: 'queen',
         numBeds: 2,
         costPerNight: 1317.94,
+      },
+      {
+        number: 14,
+        roomType: 'residential suite',
+        bidet: 'false',
+        bedSize: 'twin',
+        numBeds: 1,
+        costPerNight: 1343.41,
       },
       {
         number: 15,
@@ -227,6 +243,14 @@ describe('determine availability', function () {
         costPerNight: 1372.31,
       },
       {
+        number: 19,
+        roomType: 'single room',
+        bidet: 'false',
+        bedSize: 'queen',
+        numBeds: 1,
+        costPerNight: 1281,
+      },
+      {
         number: 20,
         roomType: 'residential suite',
         bidet: 'false',
@@ -241,14 +265,6 @@ describe('determine availability', function () {
         bedSize: 'full',
         numBeds: 2,
         costPerNight: 1321.99,
-      },
-      {
-        number: 22,
-        roomType: 'single room',
-        bidet: 'false',
-        bedSize: 'full',
-        numBeds: 2,
-        costPerNight: 1262.73,
       },
       {
         number: 23,

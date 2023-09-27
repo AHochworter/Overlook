@@ -22,7 +22,7 @@ const allAvailableRooms = (allRooms, allBookings, currentDate) => {
   const availableRooms = allRooms.filter(
     room => !bookedRoomNumbers.includes(room.number)
   );
-
+  // console.log({ availableRooms });
   return availableRooms;
 };
 
