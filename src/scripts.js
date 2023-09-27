@@ -185,6 +185,7 @@ upcomingBookingsBtn.addEventListener('click', () => {
     bookingsData,
     roomData
   );
+  console.log(upcomingBookings);
   addHiddenClass([openingImage]);
 
   if (upcomingBookings.length === 0) {
@@ -254,7 +255,8 @@ allRoomTypes.addEventListener('click', () => {
 });
 
 dashboardBtn.addEventListener('click', () => {
-  cardContainer.innerHTML = `<img class="opening-img "src="./images/welcome-to-overlook.jpg"/>`;
+  cardContainer.innerHTML = `<img class="opening-img "src="./images/welcome-to-overlook.jpg" alt="overlook-hotel-from-across-the-lake"/>`;
+  roomsAvailMessage.textContent = '';
   removeHiddenClass([
     openingImage,
     dashboardView,
@@ -294,18 +296,20 @@ function displayBookings(bookings, roomData) {
       currentGuest,
       bookingsData,
       roomData
-    ).find(item => item.date === booking.date);
+    ).filter(item => item.date === booking.date);
 
+    console.log('roomDetails', roomDetails);
     if (roomDetails) {
-      cardContainer.innerHTML += `
+      roomDetails.forEach(booking => {
+        cardContainer.innerHTML += `
       <div class="card-wrapper"> 
         <div class="img-wrapper">
           <img class="room-img" src="./images/${
-            roomDetails.room.roomType
-          }.jpg" alt="${roomDetails.room.roomType}" />
+            booking.room.roomType
+          }.jpg" alt="${booking.room.roomType}" />
         </div>
         <div class="card room-details-wrapper">
-        <h3 class="room-type">${roomDetails.room.roomType.toUpperCase()}</h3>
+        <h3 class="room-type">${booking.room.roomType.toUpperCase()}</h3>
         <h3 class="date-booked">Date: ${new Date(
           booking.date
         ).toLocaleDateString('en-US', {
@@ -314,16 +318,17 @@ function displayBookings(bookings, roomData) {
           day: '2-digit',
         })}</h3>
         <h4 class="room-details room-number">Room Number: ${
-          roomDetails.room.number
+          booking.room.number
         }</h4>
-        <h4 class="room-details">${roomDetails.room.numBeds} ${
-        roomDetails.room.bedSize
-      } bed(s)</h4>
+        <h4 class="room-details">${booking.room.numBeds} ${
+          booking.room.bedSize
+        } bed(s)</h4>
         <h4 class="room-details room-cost">Cost Per Night: $${
-          roomDetails.room.costPerNight
+          booking.room.costPerNight
         }</h4>
       </div>
     </div>`;
+      });
     }
   });
 }
@@ -407,6 +412,7 @@ const handleRoomBooking = event => {
   const roomCard = event.target.closest('.card-wrapper');
   const roomNumber = parseInt(roomCard.dataset.roomNumber); // Assuming you set a "data-room-number" attribute in your HTML
   const selectedRoom = roomData.find(room => room.number === roomNumber);
+  console.log('handleRoomBooking', selectedRoom);
 
   if (selectedRoom) {
     // Display booking details for the selected room
@@ -430,7 +436,7 @@ const displaySelectedBooking = selectedRoom => {
       </div>
       <div class="single-card-main-wrapper">
         <div class="single-card-text-wrapper">
-          <h3 class="card-booking-text">We Look Forward to Your Visit!</h3>
+          <h2 class="card-booking-text">We Look Forward to Your Visit!</h2>
           <h3 class="date-booked">Date: ${new Date(
             searchDate
           ).toLocaleDateString('en-US', {
@@ -459,11 +465,13 @@ const displaySelectedBooking = selectedRoom => {
   const reserveButton = selectedRoomContainer.querySelector('.reserve.bookBtn');
   reserveButton.addEventListener('click', () => {
     console.log('reserve button clicked');
+    console.log('selectedRoom just before POST', selectedRoom);
     handleReservation(selectedRoom, searchDate);
   });
 };
 
 const handleReservation = (selectedRoom, searchDate) => {
+  console.log('handleReservation', selectedRoom);
   const bookingData = {
     userID: currentGuest.id,
     date: searchDate,
@@ -485,9 +493,10 @@ const handleReservation = (selectedRoom, searchDate) => {
     .then(data => {
       //Update the global bookingsData variable
       bookingsData = data.bookings;
-      console.log(bookingsData);
+      console.log('bookingsData after New FETCH', bookingsData);
+      console.log('data.bookings', data.bookings);
 
-      displayBookings(bookingsData, roomData);
+      // displayBookings(bookingsData, roomData);
     })
     .catch(error => {
       console.error('Error in handleReservation:', error);
