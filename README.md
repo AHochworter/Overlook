@@ -1,99 +1,61 @@
-# Webpack Starter Kit
+# Overlook at Chimney Hollow
 
-## Clone This Repo
+## Abstract
 
-That's right, _clone_ not fork. You will use this repo multiple times, but you can only fork a repository once. So here is what you need to do to clone the repo and still be able to push changes to your repo:
+Welcome to 'The Overlook at Chimney Hollow,' a picturesque hotel nestled on the tranquil shores of a pristine reservoir in the foothills of northern Colorado. Embark on your next escape to this captivating destination with the convenience of our newly introduced hotel management application. Our user-friendly interface empowers guests to effortlessly oversee their bookings, whether it's perusing upcoming stays or reminiscing about past visits through detailed expense breakdowns and room histories. With the OCH app's intuitive design, reserving rooms for your preferred check-in dates is a breeze, guaranteeing that your upcoming stays align perfectly with your dreams and are seamlessly organized. Your journey to serenity begins here.
 
-1. Clone down this repo. Since you don't want to name your project "webpack-starter-kit", you can use an optional argument when you run `git clone` (you replace the `[...]` with the terminal command arguments): `git clone [remote-address] [what you want to name the repo]`
-1. Remove the default remote: `git remote rm origin` (notice that `git remote -v` not gives you back nothing)
-1. Create a new repo on GitHub with the name of `[what you want to name the repo]` to be consistent with naming
-1. Copy the address that you would use to clone down this repo - something like `git@github.com:...`
-1. Add this remote to your cloned down repo: `git remote add origin [address you copied in the previous step]` - do not include the brackets
+## Preview of the App
 
-Now try to commit something (just add a line in the README) and push it up to your new repo. If everything is setup correctly, you should see the changes on GitHub.
+## Contributors
 
-## Setup
+- [Ann Hochworter](https://github.com/AHochworter)
 
-After one person has gone through the steps of cloning down this repo and editing the remote, everyone should clone down the repo.
+- Pull Requests Reviewed by:
 
-Then install the library dependencies. Run:
+- [Nicole Lam](https://github.com/Nicolelam8891)
 
-```bash
-npm install
-```
+## Installation Instructions
 
-To verify that it is setup correctly, run `npm start` in your terminal. Go to `http://localhost:8080/` and you should see a page with the Turing logo image and a beautiful gradient background. If that's the case, you're good to go. Enter `control + c` in your terminal to stop the server at any time.
+1. Copy SSH key.
+2. Open up the terminal.
+3. Change into the directory you wish to clone the app into with the cd command.
+4. Use the git clone git@github.com:AHochworter/Overlook.git command followed by pasting the copied SSH key.
+5. Change into the cloned directory with the cd command followed by the name of the directory.
+6. Run npm install and wait a few seconds until its finish installing
+7. Run npm start
+8. Change into the directory where you cloned the Overlook front end app
+9. Use git clone to clone the overlook backend api into this directory.  
+   https://github.com/turingschool-examples/overlook-api
 
-## Where to Add Your Code
+### Learning Goals
 
-### JavaScript
+- Use object and array prototype methods to perform data manipulation
+- Create a clear and accessible user interface
+- Make network requests to retrieve data
+- Implement a robust testing suite using TDD
+- Write DRY, reusable code that follows SRP (Single Responsibility Principle)
 
-You have to be very intentional with where you add your feature code. This repo uses a tool called [webpack](https://webpack.js.org/) to combine many JavaScript files into one big file. Webpack enables you to have many, separate JavaScript files to keep your code organized and readable. Webpack expects all of your code files to be in a specific place, or else it doesn't know how to combine them all behind the scenes.
+## Tech Used:
 
-**Create all of your feature code files in the `src` directory.**
+- Github, Terminal, VS Code, Dev Tools, Javascript, Figma, CSS, and HTML, Network Requests
 
-Since code is separated into multiple files, you need to use the `import` and `export` syntax to share code across file.
+## Resources Used:
 
-Here is a video that walks through some information about [import and export](https://www.youtube.com/watch?v=_3oSWwapPKQ). There are a lot of resources out there about `import` and `export`, and resources will sometimes call them `ES6 modules`. It's something you will see in React and beyond.
+- MDN Documents, Google, Stack Overflow.
 
-### HTML
+## Wins + Challenges
 
-Add the HTML you need in the `index.html` file in the `./dist` directory. There is some boilerplate HTML that exists from the start that you can modify.
+### Wins:
 
-### Images
+- Practicing and starting to implement iterator methods was a win and a challenge at the same time.
+- Using the iterator methods in a "real world" situation solidified the importance of these methods for future personal and professional development for me.
+- The continued pursuit of getting better at troubleshooting was another win for me during this project. The importance of using console.logs, inspecting elements in Dev Tools and following a thread back to the problem is rewarding and frustrating in tandem. The win when you find and fix the issue is a great feeling!
+- I made better use of the GitHub project board and Github issues during this project finding that I really enjoy both of these tools.
+- Having the confidence and self-awareness to reach out to cohorts, "rocks", student support and mentors for guidance was another area of growth for me during this project.
+- The biggest win was successfully finishing the project!
 
-Add your image files in the `src/images` directory. Similar to CSS files, you need to `import` image files in the JavaScript entry file (`scripts.js`). Then go into the HTML and add an `img` element with the `src` attribute pointing to the `images` directory. There is an example in the `index.html` file for you to see.
+### Challenges:
 
-## How to View Your Code in Action
-
-In the terminal, run:
-
-```bash
-npm start
-```
-
-You will see a bunch of lines output to your terminal. One of those lines will be something like:
-
-```bash
-Project is running at http://localhost:8080/
-```
-
-Go to `http://localhost:8080/` in your browser to view your code running in the browser.
-
----
-
-## Test Files Organization
-
-Similar to feature code, your test code needs to be put in a specific place for it to run successfully.
-
-**Put all of your test files in the `test` directory.** As a convention, all test filenames should end with `-test.js`. For instance: `box-test.js`.
-
-## Running Your Tests
-
-Run your test suite using the command:
-
-```bash
-npm test
-```
-
-The test results will output to the terminal.
-
----
-
-## Linting Your Code
-
-Run the command in your terminal `npm run lint` to run the linter on your JavaScript code. There will be errors and warnings right from the start in this starter kit - the linter is still running successfully.
-
-Your linter will look at the JavaScript files you have within the `src` directory and the `test` directory.
-
-## Webpack?
-
-If you look in the `package.json` file, you'll see one of the library dependencies called `webpack`. If you're interested in learning more about what Webpack is and how it works behind the scenes, take a look through the [Webpack configuration documentation](https://webpack.js.org/concepts/).
-
-## Deploying to GitHub Pages
-
-_If you are finished with the functionality and testing of your project_, then you can consider deploying your project to the web! This way anyone can play it without cloning down your repo.
-
-[GitHub Pages](https://pages.github.com/) is a great way to deploy your project to the web. Don't worry about this until your project is free of bugs and well tested!
-
-If you _are_ done, you can follow [this procedure](./gh-pages-procedure.md) to get your project live on GitHub Pages.
+- The implementation of the iterator methods that were introduced during this mod was one of the biggest challenges in this project. These methods still feel new and unpracticed, it was challenging to find and reach for the correct method.
+- Git flow and Github continue to be a challenge. For me, there are still a lot of aspects that remain elusvive and underutilized.
+- Establishing the flow of data to the DOM. The file structure and archetecture, import and export aspects, and a general feel of "oranized chaos" remain a challenge for me.
