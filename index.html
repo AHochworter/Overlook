@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="src/css/styles.css" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- <link rel="stylesheet" href="datepicker.min.css" /> -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@600&family=Roboto:wght@100;400&display=swap"
+      rel="stylesheet"
+    />
+    <title>Overlook</title>
+  </head>
+  <body>
+    <header class="page-header">
+      <div class="logo-wrapper">
+        <img
+          class="img-logo"
+          src="./images/overlook-logo.jpg"
+          alt="overlook-logo"
+        />
+        <h2 class="och-tagline">Oh so different!</h2>
+      </div>
+      <div class="opening-message-wrapper">
+        <h1 class="overlook-heading">Overlook at Chimney Hollow</h1>
+        <h2 class="welcome-user hidden" id="welcomeUser">Welcome Back!</h2>
+        <h3 class="total-spent hidden" id="totalSpent">
+        Your total Spent is ${currentGuest.totalSpent}
+      </h3>
+      </div>
+      <nav class="master-buttons-wrapper">
+        <button class="master-nav hidden" id="bookRoomBtn" tabindex="0">Book Room</button>
+        <button class="master-nav hidden" id="logOutBtn">Log Out</button>
+        <button class="master-nav hidden" id="dashboard">Dashboard</button>
+      </nav>
+    </header>
+    <main>
+      <section class="login-view" id="loginView">
+        <div class="login-wrapper" id="loginWrapper">
+          <h2 class="login-message" id="loginMessage">Welcome to the Overlook</h2>
+          <h2 class="login-message" id="loginPlease">Please Log In</h2>          
+          <form class="login-form" id="loginForm">
+            <label for="username" class="username">Username</label>
+            <input type="text" class="user-input" id="username" value="" />
+            <label for="password" class="password">Password</label>
+            <input type="password" class="password-input" id="password" value="" />
+            <button type="button" class="login-btn">Login</button>
+            <div class="error-message" id="errorMessage" ></div>
+          </form>
+        </div>
+      </section>
+      <section class="dashboard-view hidden" id="dashboardView">
+        <nav class="dashboard-view-nav" id="navDashboard">
+          <button class="upcoming-bookings-btn" id="upcomingBookings">Upcoming Stays</button>
+          <button class="past-bookings-btn" id="pastBookings">Past Stays</button>
+        </nav>
+        <div class="card-container" id="cardContainer">
+          <img class="opening-img" src="./images/welcome-to-overlook.jpg" alt="overlook-view" />
+        </div>
+      </section>
+      <section class="book-a-room-step-one hidden" id="bookARoomOne">
+        <nav class="book-a-room-one" id="navBookARoomOne">
+          <fieldset>
+            <legend>Book A Room</legend>
+            <form class="book-a-room-form">
+              <label class="select-a-date" for="dateOfStay">Select a Date</label>
+              <input class="date-input" aria-label="select-a-date" type="date" id="dateOfStay" name="date-of-stay" required/>
+              <button type="submit" class="select-date-btn">Search</button>
+            </form>
+          </fieldset>                       
+            <button class="single-room" id="singleRoom">Single</button>
+            <button class="junior-suite" id="juniorSuite">Junior Suite</button>
+            <button class="residential" id="residential">Residential</button>
+            <button class="suite" id="suite">Suite</button>
+            <button class="all-room-types" id="allRoomTypes">All</button>               
+          </nav>
+          <h2 class="rooms-available hidden" id="roomsAvail">Rooms Available</h2>
+        <div class="room-container" id="bookARoomOneContainer">
+          <!-- Room cards go here! -->
+        </div>
+      </section>
+      <section class="book-a-room-step-two hidden" id="bookARoomTwo">
+        <div class="selected-room" id="bookARoomtwoContainer">
+      </section>
+    </main>
+    <!-- Do not include the scripts.js or class files here - it is done by the webpack server -->
+    <script src="bundle.js"></script>
+  </body>
+</html>
