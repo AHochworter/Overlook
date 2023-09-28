@@ -5,7 +5,7 @@
 Welcome to 'The Overlook at Chimney Hollow,' a picturesque hotel nestled on the tranquil shores of a pristine reservoir in the foothills of northern Colorado. Embark on your next escape to this captivating destination with the convenience of our newly introduced hotel management application. Our user-friendly interface empowers guests to effortlessly oversee their bookings, whether it's perusing upcoming stays or reminiscing about past visits through detailed expense breakdowns and room histories. With the OCH app's intuitive design, reserving rooms for your preferred check-in dates is a breeze, guaranteeing that your upcoming stays align perfectly with your dreams and are seamlessly organized. Your journey to serenity begins here.
 
 ## Preview of the App
-![overlook-preview](https://github.com/AHochworter/Overlook/assets/125393235/d9972660-1b38-4b70-ab2d-78589dc1e0a8)
+![overlook-preview-two](https://github.com/AHochworter/Overlook/assets/125393235/2b58ed97-2cac-474b-8ee4-007e5677adc0)
 
 ## Contributors
 
