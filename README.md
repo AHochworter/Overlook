@@ -41,8 +41,9 @@ The 'Overlook' project was assigned during the fifth week of Mod 2 at Turing Sch
   
 <img src="https://img.shields.io/badge/-mocha-%238D6748?style=for-the-badge&logo=mocha&logoColor=white" /> <img src="https://img.shields.io/badge/chai-A30701?style=for-the-badge&logo=chai&logoColor=white" />
 
-</div>
 
 ### Resources Used:
 
 - MDN Documents, Google, ChatGPT
+
+</div>
