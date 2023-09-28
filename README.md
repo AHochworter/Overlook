@@ -1,4 +1,4 @@
-# Overlook at Chimney Hollow
+# 🏨 Overlook at Chimney Hollow
 
 ## Abstract
 
@@ -47,22 +47,3 @@ Welcome to 'The Overlook at Chimney Hollow,' a picturesque hotel nestled on the 
 ### Resources Used:
 
 - MDN Documents, Google, Stack Overflow.
-
-
-
-### Wins + Challenges
-
-### Wins:
-
-- Practicing and starting to implement iterator methods was a win and a challenge at the same time.
-- Using the iterator methods in a "real world" situation solidified the importance of these methods for future personal and professional development for me.
-- The continued pursuit of getting better at troubleshooting was another win for me during this project. The importance of using console.logs, inspecting elements in Dev Tools and following a thread back to the problem is rewarding and frustrating in tandem. The win when you find and fix the issue is a great feeling!
-- I made better use of the GitHub project board and Github issues during this project finding that I really enjoy both of these tools.
-- Having the confidence and self-awareness to reach out to cohorts, "rocks", student support and mentors for guidance was another area of growth for me during this project.
-- The biggest win was successfully finishing the project!
-
-### Challenges:
-
-- The implementation of the iterator methods that were introduced during this mod was one of the biggest challenges in this project. These methods still feel new and unpracticed, it was challenging to find and reach for the correct method.
-- Git flow and Github continue to be a challenge. For me, there are still a lot of aspects that remain elusvive and underutilized.
-- Establishing the flow of data to the DOM. The file structure and archetecture, import and export aspects, and a general feel of "oranized chaos" remain a challenge for me.
