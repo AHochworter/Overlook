@@ -2,7 +2,9 @@
 
 ## Abstract
 
-Welcome to 'The Overlook at Chimney Hollow,' a picturesque hotel nestled on the tranquil shores of a pristine reservoir in the foothills of northern Colorado. Embark on your next escape to this captivating destination with the convenience of our newly introduced hotel management application. Our user-friendly interface empowers guests to effortlessly oversee their bookings, whether it's perusing upcoming stays or reminiscing about past visits through detailed expense breakdowns and room histories. With the OCH app's intuitive design, reserving rooms for your preferred check-in dates is a breeze, guaranteeing that your upcoming stays align perfectly with your dreams and are seamlessly organized. Your journey to serenity begins here.
+Welcome to 'The Overlook at Chimney Hollow,' a picturesque hotel nestled on the tranquil shores of a pristine reservoir in the foothills of northern Colorado. Embark on your next escape to this captivating destination with the convenience of our newly introduced hotel management application. 
+
+Our user-friendly interface empowers guests to effortlessly oversee their bookings, whether it's perusing upcoming stays or reminiscing about past visits through detailed expense breakdowns and room histories. With the OCH app's intuitive design, reserving rooms for your preferred check-in dates is a breeze, guaranteeing that your upcoming stays align perfectly with your dreams and are seamlessly organized. Your journey to serenity begins here.
 
 ## Preview of the App
 ![overlook-preview-two](https://github.com/AHochworter/Overlook/assets/125393235/2b58ed97-2cac-474b-8ee4-007e5677adc0)
@@ -11,7 +13,7 @@ Welcome to 'The Overlook at Chimney Hollow,' a picturesque hotel nestled on the 
 
 - [Ann Hochworter](https://github.com/AHochworter)
 
-- Pull Requests Reviewed by:
+  Pull Requests Reviewed by:
 
 - [Nicole Lam](https://github.com/Nicolelam8891)
 
@@ -30,6 +32,10 @@ Welcome to 'The Overlook at Chimney Hollow,' a picturesque hotel nestled on the 
 - Implement a robust testing suite using TDD
 - Write DRY, reusable code that follows SRP (Single Responsibility Principle)
 
+### Context:
+The 'Overlook' project was assigned during the fifth week of Mod 2 at Turing School of Software & Design.  We were given one week to complete this project.
+  
+
   
 <div align="center">
   
@@ -46,4 +52,4 @@ Welcome to 'The Overlook at Chimney Hollow,' a picturesque hotel nestled on the 
 
 ### Resources Used:
 
-- MDN Documents, Google, Stack Overflow.
+- MDN Documents, Google, ChatGPT
