@@ -44,6 +44,8 @@ The 'Overlook' project was assigned during the fifth week of Mod 2 at Turing Sch
 
 ### Resources Used:
 
-- MDN Documents, Google, ChatGPT
+![MDN Web Docs](https://img.shields.io/badge/MDN_Web_Docs-black?style=for-the-badge&logo=mdnwebdocs&logoColor=white)
+![ChatGPT](https://img.shields.io/badge/chatGPT-74aa9c?style=for-the-badge&logo=openai&logoColor=white)
+![Google Chrome](https://img.shields.io/badge/Google%20Chrome-4285F4?style=for-the-badge&logo=GoogleChrome&logoColor=white)
 
 </div>
