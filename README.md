@@ -13,16 +13,11 @@ Our user-friendly interface empowers guests to effortlessly oversee their bookin
 
 - [Ann Hochworter](https://github.com/AHochworter)
 
-  Pull Requests Reviewed by:
-
-- [Nicole Lam](https://github.com/Nicolelam8891)
-
 ### Installation Instructions
 
 1. [Deployed Link](https://ahochworter.github.io/Overlook/)
 2. For the user name enter `customer15` using any number between 1 and 50.
 3. Enter the password `overlook2021`
-
 
 ### Learning Goals
 
@@ -34,10 +29,8 @@ Our user-friendly interface empowers guests to effortlessly oversee their bookin
 
 ### Context:
 The 'Overlook' project was assigned during the fifth week of Mod 2 at Turing School of Software & Design.  We were given one week to complete this project.
-  
-
-  
-<div align="center">
+ 
+ <div align="center">
   
 ### Technologies Used:
   
